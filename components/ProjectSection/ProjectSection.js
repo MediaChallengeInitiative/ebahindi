@@ -75,10 +75,10 @@ const ProjectSection = (props) => {
             <div className="col-lg-4 col-12">
               <div className="title">
                 <h2>Recent Work.</h2>
-                <p>
+                {/* <p>
                   Must explain to you how all this mistaken idea pleasure born
                   and give you a complete account.
-                </p>
+                </p> */}
               </div>
             </div>
             <div className="col-lg-6 offset-lg-2">
