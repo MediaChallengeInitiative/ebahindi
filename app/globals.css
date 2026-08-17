@@ -4,114 +4,103 @@
 
 @layer base {
   :root {
-    --navy: #0a1b2e;
-    --amber: #ffb627;
-    --amber-ink: #d9760a;
+    --teal-900: #061d1e;
+    --teal-800: #0a2526;
+    --teal-700: #1f3434;
+    --amber: #ffae00;
+    --ink: #0e161f;
   }
 
   html {
     scroll-behavior: smooth;
-    /* Offset anchored sections so the sticky header never covers a heading. */
-    scroll-padding-top: 5.5rem;
+    scroll-padding-top: 6rem;
     -webkit-text-size-adjust: 100%;
   }
 
   body {
-    @apply bg-white font-sans text-navy antialiased;
+    @apply bg-teal-900 font-sans text-white antialiased;
     text-rendering: optimizeLegibility;
+    /* Faint diagonal weave, the same trick Ovro uses to keep the flat teal alive. */
+    background-image: repeating-linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.014) 0px,
+      rgba(255, 255, 255, 0.014) 1px,
+      transparent 1px,
+      transparent 7px
+    );
   }
 
-  /* Visible, consistent focus ring for keyboard users on both grounds. */
   :focus-visible {
-    outline: 2px solid var(--amber-ink);
+    outline: 2px solid var(--amber);
     outline-offset: 3px;
-    border-radius: 2px;
-  }
-
-  .on-dark :focus-visible {
-    outline-color: var(--amber);
+    border-radius: 4px;
   }
 
   ::selection {
     background: var(--amber);
-    color: var(--navy);
+    color: var(--ink);
   }
 }
 
 @layer components {
-  /* Small-caps section label with generous tracking. */
-  .label {
-    @apply font-sans text-[11px] font-semibold uppercase tracking-label;
-  }
-
-  .display {
-    @apply font-serif font-normal leading-[1.12] tracking-[-0.015em];
-  }
-
-  .accent-italic {
-    @apply italic;
-    color: var(--amber-ink);
-  }
-
-  .on-dark .accent-italic {
-    color: var(--amber);
-  }
-
   .shell {
-    @apply mx-auto w-full max-w-6xl px-5 sm:px-8 lg:px-10;
+    @apply mx-auto w-full max-w-[1400px] px-5 sm:px-7 lg:px-9;
   }
 
-  .section {
-    @apply py-20 sm:py-24 lg:py-32;
+  .label {
+    @apply text-[11px] font-bold uppercase tracking-label text-amber;
   }
 
-  /* Buttons */
-  .btn {
-    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold
-           transition duration-200 ease-out;
+  /* Ovro's signature: heavy sans headline, one word in italic amber Playfair. */
+  .headline {
+    @apply font-sans font-extrabold leading-[1.05] tracking-[-0.02em];
   }
 
-  .btn-primary {
-    @apply btn text-navy;
-    background: var(--amber);
+  .accent {
+    @apply font-display font-medium italic text-amber;
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+    text-decoration-thickness: 0.045em;
   }
 
-  .btn-primary:hover {
-    background: #ffc65a;
-  }
-
-  .btn-secondary {
-    @apply btn border text-white;
-    border-color: rgba(255, 255, 255, 0.28);
-  }
-
-  .btn-secondary:hover {
-    border-color: rgba(255, 182, 39, 0.7);
-    background: rgba(255, 182, 39, 0.08);
-  }
-
-  .btn-ink {
-    @apply btn border text-navy;
-    border-color: rgba(10, 27, 46, 0.18);
-  }
-
-  .btn-ink:hover {
-    border-color: var(--amber-ink);
-    background: rgba(217, 118, 10, 0.06);
+  .panel {
+    @apply rounded-3xl border border-line-soft bg-teal-800 shadow-panel;
   }
 
   .card {
-    @apply rounded-2xl bg-white shadow-card transition duration-300 ease-out;
+    @apply rounded-2xl border border-line-soft bg-teal-700/60 transition duration-300 ease-out;
   }
 
-  .card-dark {
-    @apply rounded-2xl shadow-card-dark transition duration-300 ease-out;
-    background: #102942;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold
+           transition duration-200 ease-out;
+  }
+
+  .btn-amber {
+    @apply btn text-ink;
+    background: linear-gradient(100deg, #ffae00 0%, #fab41d 100%);
+  }
+
+  .btn-amber:hover {
+    box-shadow: 0 10px 40px -12px rgba(255, 174, 0, 0.55);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    @apply btn border border-line text-white;
+  }
+
+  .btn-ghost:hover {
+    @apply border-amber text-amber;
   }
 
   .tag {
-    @apply inline-flex items-center rounded-full border px-3.5 py-1.5 text-[13px] font-medium;
+    @apply inline-flex items-center rounded-full border border-line-soft bg-white/[0.04]
+           px-3.5 py-1.5 text-[13px] font-medium text-white/85 transition-colors;
+  }
+
+  .tag:hover {
+    @apply border-amber/50 text-amber;
   }
 }
 
@@ -119,29 +108,33 @@
   .balance {
     text-wrap: balance;
   }
-
   .pretty {
     text-wrap: pretty;
   }
 }
 
-/* Scroll-reveal, progressively enhanced.
-   The hidden starting state is scoped to `.js`, which an inline script in the
-   document head sets before first paint. If that script never runs — JS
-   disabled, bundle blocked, a flaky mobile connection — every section renders
-   plainly visible instead of staying blank forever. */
+/* Progressive enhancement: the hidden start state only exists once an inline
+   script has marked the document JS-capable. No JS -> everything visible. */
 .js .reveal {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(22px);
   transition:
     opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
 }
 
 .js .reveal.is-visible {
   opacity: 1;
   transform: none;
+}
+
+/* Custom cursor is desktop-pointer only; it never hides the native cursor on
+   touch, and never on devices without a fine pointer. */
+@media (pointer: fine) {
+  .has-magnetic-cursor,
+  .has-magnetic-cursor * {
+    cursor: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -36,7 +36,7 @@ export default function YouTubeFacade({ id, title }: Props) {
     <button
       type="button"
       onClick={() => setActive(true)}
-      className="group relative block aspect-video w-full overflow-hidden rounded-xl bg-navy-deep"
+      className="group relative block aspect-video w-full overflow-hidden rounded-xl bg-teal-900"
       aria-label={`Play video: ${title}`}
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -49,14 +49,14 @@ export default function YouTubeFacade({ id, title }: Props) {
         height={360}
         className="h-full w-full scale-[1.35] object-cover transition duration-500 group-hover:scale-[1.4]"
       />
-      <span className="absolute inset-0 bg-navy/35 transition-colors group-hover:bg-navy/20" />
+      <span className="absolute inset-0 bg-teal-900/40 transition-colors group-hover:bg-teal-900/20" />
       <span
         aria-hidden="true"
         className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2
                    items-center justify-center rounded-full bg-amber shadow-lg transition
                    duration-300 group-hover:scale-110"
       >
-        <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6 fill-navy">
+        <svg viewBox="0 0 24 24" className="ml-1 h-6 w-6 fill-ink">
           <path d="M8 5v14l11-7z" />
         </svg>
       </span>

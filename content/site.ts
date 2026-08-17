@@ -325,10 +325,27 @@ export const skills = {
   ],
 } as const;
 
-export const nav = [
-  { label: "About", href: "#about" },
-  { label: "AI Media Lab", href: "#ai-media-lab" },
-  { label: "Speaking", href: "#speaking" },
-  { label: "Work", href: "#work" },
-  { label: "Contact", href: "#contact" },
-] as const;
+/**
+ * The left rail doubles as the mobile menu and as the scrollspy source, so the
+ * ids here must match the section ids rendered on the page.
+ *
+ * Ovro ships Testimonial and Blog items too. Both are dropped: he has neither,
+ * and a rail entry that scrolls to invented content is worse than no entry.
+ */
+export type RailItem = {
+  id: string;
+  label: string;
+  icon: "home" | "user" | "lab" | "mic" | "grid" | "spark" | "mail";
+};
+
+export const rail: RailItem[] = [
+  { id: "top", label: "Home", icon: "home" },
+  { id: "about", label: "About", icon: "user" },
+  { id: "ai-media-lab", label: "AI Media Lab", icon: "lab" },
+  { id: "speaking", label: "Speaking", icon: "mic" },
+  { id: "work", label: "Work", icon: "grid" },
+  { id: "skills", label: "Skills", icon: "spark" },
+  { id: "contact", label: "Contact", icon: "mail" },
+];
+
+export const nav = rail.filter((item) => item.id !== "top");
