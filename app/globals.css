@@ -1,0 +1,198 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --teal-900: #061d1e;
+    --teal-800: #0a2526;
+    --teal-700: #1f3434;
+    --amber: #ffae00;
+    --ink: #0e161f;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-teal-900 font-sans text-white antialiased;
+    text-rendering: optimizeLegibility;
+    /* Faint diagonal weave, the same trick Ovro uses to keep the flat teal alive. */
+    background-image: repeating-linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.014) 0px,
+      rgba(255, 255, 255, 0.014) 1px,
+      transparent 1px,
+      transparent 7px
+    );
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--amber);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  ::selection {
+    background: var(--amber);
+    color: var(--ink);
+  }
+}
+
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-[1400px] px-5 sm:px-7 lg:px-9;
+  }
+
+  .label {
+    @apply text-[11px] font-bold uppercase tracking-label text-amber;
+  }
+
+  /* Ovro's signature: heavy sans headline, one word in italic amber Playfair. */
+  .headline {
+    @apply font-sans font-extrabold leading-[1.05] tracking-[-0.02em];
+  }
+
+  .accent {
+    @apply font-display font-medium italic text-amber;
+    text-decoration: underline;
+    text-underline-offset: 0.12em;
+    text-decoration-thickness: 0.045em;
+  }
+
+  .panel {
+    @apply rounded-3xl border border-line-soft bg-teal-800 shadow-panel;
+  }
+
+  /* Card language adapted from pubitygroup.com: chunky radius, thick accent
+     border, and a HARD un-blurred slab of accent colour offset behind the card.
+     Pubity does this in #FFEB00 on charcoal; rendered here in our amber on teal
+     so it stays coherent with the rest of the system. */
+  .card-pop {
+    @apply rounded-[22px] bg-teal-800 transition-[transform,box-shadow] duration-200 ease-out;
+    border: 3px solid theme("colors.amber.DEFAULT");
+    box-shadow: 8px 9px 0 0 theme("colors.amber.DEFAULT");
+  }
+
+  .card-pop:hover,
+  .card-pop:focus-visible {
+    transform: translate(3px, 3px);
+    box-shadow: 5px 6px 0 0 theme("colors.amber.DEFAULT");
+  }
+
+  /* The global focus ring is amber, which would sit invisibly against this
+     card's amber border. Use white here so focus stays distinguishable from
+     hover. */
+  .card-pop:focus-visible {
+    outline-color: #ffffff;
+  }
+
+  .card-pop:active {
+    transform: translate(8px, 9px);
+    box-shadow: 0 0 0 0 theme("colors.amber.DEFAULT");
+  }
+
+  /* Static information cards. Same shape, no slab — a wall of amber blocks
+     would flatten the hierarchy that makes the interactive cards read as
+     clickable. */
+  .card-quiet {
+    @apply rounded-[22px] border border-line-soft bg-teal-700/60
+           transition duration-300 ease-out;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-bold
+           transition duration-200 ease-out;
+  }
+
+  .btn-amber {
+    @apply btn text-ink;
+    background: linear-gradient(100deg, #ffae00 0%, #fab41d 100%);
+  }
+
+  .btn-amber:hover {
+    box-shadow: 0 10px 40px -12px rgba(255, 174, 0, 0.55);
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost {
+    @apply btn border border-line text-white;
+  }
+
+  .btn-ghost:hover {
+    @apply border-amber text-amber;
+  }
+
+  .tag {
+    @apply inline-flex items-center rounded-full border border-line-soft bg-white/[0.04]
+           px-3.5 py-1.5 text-[13px] font-medium text-white/85 transition-colors;
+  }
+
+  .tag:hover {
+    @apply border-amber/50 text-amber;
+  }
+}
+
+@layer utilities {
+  .balance {
+    text-wrap: balance;
+  }
+  .pretty {
+    text-wrap: pretty;
+  }
+}
+
+/* Progressive enhancement: the hidden start state only exists once an inline
+   script has marked the document JS-capable. No JS -> everything visible. */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.js .reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Custom cursor is desktop-pointer only; it never hides the native cursor on
+   touch, and never on devices without a fine pointer. */
+@media (pointer: fine) {
+  .has-magnetic-cursor,
+  .has-magnetic-cursor * {
+    cursor: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .js .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .card-pop,
+  .card-pop:hover,
+  .card-pop:focus-visible,
+  .card-pop:active {
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}

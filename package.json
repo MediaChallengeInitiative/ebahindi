@@ -1,33 +1,33 @@
 {
   "private": true,
   "name": "ebahindi",
+  "version": "2.0.0",
+  "description": "Personal site of Eng. Emmanuel Bahindi — Software Engineer & AI Speaker",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "@emotion/react": "^11.10.5",
-    "@emotion/styled": "^11.10.5",
-    "@mui/material": "^5.11.0",
-    "@mui/styled-engine-sc": "^5.11.0",
-    "animate.css": "^4.1.1",
-    "bootstrap": "^5.1.3",
-    "eslint-config-next": "^13.0.7",
-    "next": "^13.0.7",
-    "react": "^18.2.0",
-    "react-anchor-link-smooth-scroll": "^1.0.12",
-    "react-animated-css": "^1.2.1",
-    "react-dom": "^18.2.0",
-    "react-fontawesome": "^1.7.1",
-    "react-router-dom": "^5.1.2",
-    "react-scroll": "^1.7.16",
-    "react-slick": "^0.29.0",
-    "reactstrap": "^9.1.5",
-    "sass": "^1.54.4",
-    "sharp": "^0.31.2",
-    "simple-react-validator": "^1.5.0",
-    "slick-carousel": "^1.8.1",
-    "styled-components": "^5.3.6"
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "framer-motion": "^13.1.0",
+    "next": "^16.3.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "three": "^0.185.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.4",
+    "@types/three": "^0.185.4",
+    "autoprefixer": "^10.4.19",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.3.1",
+    "postcss": "^8.4.39",
+    "tailwindcss": "^3.4.6",
+    "typescript": "^5.5.3"
   }
 }
