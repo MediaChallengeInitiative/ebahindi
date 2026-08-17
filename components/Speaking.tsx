@@ -54,11 +54,7 @@ export default function Speaking() {
     <Section
       id="speaking"
       label={speaking.label}
-      heading={
-        <>
-          On stage, on camera, <em className="accent">on air.</em>
-        </>
-      }
+      heading={speaking.heading}
     >
       {featured?.videoId ? (
         <figure className="reveal mt-8 sm:mt-10">

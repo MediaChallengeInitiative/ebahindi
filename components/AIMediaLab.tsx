@@ -7,11 +7,7 @@ export default function AIMediaLab() {
     <Section
       id="ai-media-lab"
       label={aiMediaLab.label}
-      heading={
-        <>
-          The <em className="accent">AI Media Lab</em>
-        </>
-      }
+      heading={aiMediaLab.heading}
       intro={aiMediaLab.intro}
     >
       <div className="reveal mt-8 rounded-3xl border border-amber/25 bg-amber/[0.06] p-5 sm:mt-10 sm:p-8">
@@ -26,7 +22,7 @@ export default function AIMediaLab() {
         {aiMediaLab.contributions.map((item, i) => (
           <li
             key={item.title}
-            className="reveal card flex flex-col p-5 sm:p-6 hover:border-amber/40"
+            className="reveal card-quiet flex flex-col p-5 sm:p-6 hover:border-amber/40"
             style={{ transitionDelay: `${i * 90}ms` }}
           >
             <span aria-hidden="true" className="text-2xl font-extrabold text-amber/50">

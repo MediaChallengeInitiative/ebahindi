@@ -14,6 +14,20 @@ export const site = {
   locale: "en_UG",
 } as const;
 
+/**
+ * Section headline, split so the accent clause can be set in italic amber.
+ * `tail` carries its own leading punctuation/space.
+ */
+export type Headline = { lead: string; accent: string; tail?: string };
+
+export const contactSection = {
+  label: "Contact",
+  heading: {
+    lead: "Let\u2019s talk about your event, your team, or your",
+    accent: "next build.",
+  } as Headline,
+};
+
 export const contact = {
   location: "Kampala, Uganda",
   email: "ebahindi@gmail.com",
@@ -77,7 +91,11 @@ export const hero = {
 
 export const about = {
   label: "About",
-  heading: "An engineer who ships with AI, and teaches others to.",
+  heading: {
+    lead: "An engineer who ships with",
+    accent: "AI",
+    tail: ", and teaches others to.",
+  } as Headline,
   body: [
     "I am a software engineer based in Kampala, Uganda, and the Founder & CEO of COTE TECH (U) LTD. I work as Multimedia Web Developer and Technical Lead of the AI Media Lab at Media Challenge Initiative.",
     "AI is not a side interest in my practice — it is how I work. I use it in production every day, and I spend as much time teaching educators and journalists to use it well as I do writing code.",
@@ -105,7 +123,7 @@ export const about = {
 
 export const aiMediaLab = {
   label: "Flagship work",
-  heading: "The AI Media Lab",
+  heading: { lead: "The", accent: "AI Media Lab" } as Headline,
   project:
     "Integrating AI Competences for Fighting Disinformation into Journalism Education in Eastern Africa",
   partners: "With CAMECO • German-funded",
@@ -147,7 +165,7 @@ export type Talk = {
 
 export const speaking = {
   label: "Speaking & media",
-  heading: "On stage, on camera, on air.",
+  heading: { lead: "On stage, on camera,", accent: "on air." } as Headline,
   talks: [
     {
       title: "Highlight Video for the AI Journalism | AI Media Lab ToT",
@@ -207,7 +225,7 @@ export type WorkGroup = {
 
 export const work = {
   label: "Selected work",
-  heading: "Things I have built and shipped.",
+  heading: { lead: "Things I have", accent: "built and shipped." } as Headline,
   groups: [
     {
       id: "mci",
@@ -301,7 +319,7 @@ export const work = {
 
 export const skills = {
   label: "Skills",
-  heading: "How I work.",
+  heading: { lead: "How I", accent: "work." } as Headline,
   groups: [
     {
       title: "AI-Native Engineering",

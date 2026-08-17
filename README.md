@@ -211,20 +211,22 @@ literal Pubity palette is four token values in `tailwind.config.ts`.
 
 ### Media card sizing
 
-TikTok embeds are vertical, and a `9:16` frame made the poster cards ~711px tall — taller
-than most phone viewports. Heights are now **clamped rather than derived from an aspect
-ratio**, because an aspect ratio ties height to column width, which is what went wrong in
-a two-column grid:
+TikTok embeds are vertical, and a raw `9:16` frame made the cards ~711px tall — taller
+than most phone viewports.
 
-| State | Height | At 360px | At 1280px |
-|---|---|---|---|
-| TikTok poster | `clamp(240px, 44vw, 360px)` | 240px | 360px |
-| TikTok embed (after play) | `clamp(420px, 76vw, 600px)` | 420px | 600px |
-| YouTube | `aspect-video` | — | — |
+The ratio in use is **measured, not guessed**. Rendering TikTok's own embed at a 420px card
+width and scanning down the centre column, the video area ends at **y = 575**, where the
+caption/comments block begins. `575 / 420 = 1.369`, so the frame is `aspect-[420/575]` —
+the tallest the card can be while showing the whole video, faces included, and nothing
+below it.
 
-The poster only has to identify the episode and be clicked, so it is compact; the embed
-grows on play, because a user-initiated size change is expected but an unplayable video is
-not. `clamp()` means one rule covers 360px to 1440px with no breakpoint jumps.
+| | Rule | @360px | @768px | @1280px |
+|---|---|---|---|---|
+| TikTok card | `aspect-[420/575] max-h-[620px]` | 320x438 | 344x471 | 343x470 |
+| YouTube | `aspect-video` | - | - | - |
+
+**One frame serves both states, so pressing play causes zero layout shift.** Measured at
+all three widths: height delta `0`, document-height delta `0`, no horizontal overflow.
 
 Each poster can override its crop focal point (`posterPosition`) — the Switch Africa cover
 is text-heavy and needed framing higher so its headline is not cut mid-word.

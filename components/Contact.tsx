@@ -1,4 +1,5 @@
-import { contact, site, hero, speakingMailto } from "@/content/site";
+import { contact, contactSection, site, hero, speakingMailto } from "@/content/site";
+import { Heading } from "./Section";
 
 const socials = [
   { label: "LinkedIn", href: contact.linkedin },
@@ -17,13 +18,12 @@ export default function Contact() {
   return (
     <section id="contact" aria-labelledby="contact-heading" className="scroll-mt-24 pt-16 sm:scroll-mt-28 sm:pt-24">
       <div className="reveal max-w-3xl">
-        <p className="label">Contact</p>
+        <p className="label">{contactSection.label}</p>
         <h2
           id="contact-heading"
           className="headline balance mt-4 text-[1.65rem] min-[420px]:text-[1.9rem] sm:text-4xl lg:text-[2.6rem]"
         >
-          Let&rsquo;s talk about your event, your team, or your{" "}
-          <em className="accent">next build.</em>
+          <Heading heading={contactSection.heading} />
         </h2>
       </div>
 

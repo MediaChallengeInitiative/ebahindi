@@ -117,11 +117,7 @@ export default function Work() {
     <Section
       id="work"
       label={work.label}
-      heading={
-        <>
-          Things I have <em className="accent">built and shipped.</em>
-        </>
-      }
+      heading={work.heading}
     >
       <div className="mt-8 space-y-10 sm:mt-10 sm:space-y-12">
         {work.groups.map((group) => (

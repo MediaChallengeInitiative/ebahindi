@@ -109,24 +109,32 @@ wide tracking, amber). Reuse it — no new type styles.
 Current: `aspect-[9/16]` for TikTok. At a 400px column that is **711px tall**. Two of them
 stacked on a phone is a wall.
 
-**Replace aspect-ratio with explicit, clamped heights.** Aspect ratios tie height to
-column width, which is exactly what goes wrong in a two-column grid on a wide screen.
+**One frame, sized from a measured ratio.** The earlier 9:16 was too tall; the fix is a
+shallower, measured ratio — not abandoning aspect-ratio altogether.
 
 | State | Height |
 |---|---|
-| TikTok facade (poster) | `clamp(240px, 44vw, 360px)` |
-| TikTok active (embed) | `clamp(420px, 76vw, 600px)` |
+| TikTok card - poster **and** embed | `aspect-[420/575] max-h-[620px]` |
 | YouTube facade & embed | keep `aspect-video` (16:9 is already compact) |
+
+**One frame for both states.** Pressing play must cause **zero layout shift** - the card
+occupies exactly the same box before and after.
+
+The vertical ratio is **measured from TikTok's own embed**, not chosen by eye: at a 420px
+card width the video area ends at `y = 575`, where the caption/comments block begins.
+`575/420 = 1.369`. That is the tallest the card can be while still showing the whole video
+- faces included - and nothing below it.
 
 Rationale:
 
 - **The facade is a poster, not a video.** It only has to be legible enough to identify the
   episode and be clicked. Cropping the vertical frame to a compact landscape-ish card is
   the right trade — `object-cover` with a top-biased focal point keeps faces in frame.
-- **The embed grows on play.** A user-initiated size change is expected and unsurprising;
-  an unplayably short video is not. TikTok's player needs real height to be usable.
-- `clamp()` makes both fully fluid with **no breakpoint jumps** — one rule covers 360px to
-  1440px.
+- **The embed must not grow on play.** One frame for both states means no layout shift,
+  and the measured ratio guarantees the video is fully visible rather than cropped.
+- An aspect ratio is the right tool *here* because the video area's height genuinely
+  scales with card width. The earlier objection was to `9:16` specifically being too tall,
+  not to aspect ratios in principle.
 - The two cards stay in a `sm:grid-cols-2` grid; below `sm` they stack at full width rather
   than being capped at 320px, since the card is no longer tall enough to need it.
 

@@ -83,6 +83,13 @@
     box-shadow: 5px 6px 0 0 theme("colors.amber.DEFAULT");
   }
 
+  /* The global focus ring is amber, which would sit invisibly against this
+     card's amber border. Use white here so focus stays distinguishable from
+     hover. */
+  .card-pop:focus-visible {
+    outline-color: #ffffff;
+  }
+
   .card-pop:active {
     transform: translate(8px, 9px);
     box-shadow: 0 0 0 0 theme("colors.amber.DEFAULT");
@@ -94,11 +101,6 @@
   .card-quiet {
     @apply rounded-[22px] border border-line-soft bg-teal-700/60
            transition duration-300 ease-out;
-  }
-
-  /* Kept as an alias so existing markup keeps working. */
-  .card {
-    @apply card-quiet;
   }
 
   .btn {

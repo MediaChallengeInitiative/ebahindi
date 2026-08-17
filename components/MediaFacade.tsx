@@ -51,20 +51,20 @@ export default function MediaFacade({
   const vertical = kind === "tiktok";
 
   /**
-   * Heights are clamped rather than derived from an aspect ratio. A 9:16 frame
-   * ties height to column width, which is exactly what made these cards 700px
-   * tall in a two-column grid.
+   * One frame for both states, so pressing play causes **zero layout shift** —
+   * the card occupies exactly the same box before and after.
    *
-   * The poster only has to identify the episode and be clickable, so it is a
-   * compact card. The embed grows on play — a user-initiated size change is
-   * expected; an unplayably short video is not.
+   * The vertical ratio is measured, not guessed: in TikTok's embed at a 420px
+   * card width, the video area ends at y=575 and the caption/comments block
+   * begins. 575/420 = 1.369, so 420/575 is the widest the card can be while
+   * still showing the whole video — faces included — and nothing below it.
+   * The cap keeps it sane on very wide columns.
    */
-  const posterHeight = vertical ? "h-[clamp(240px,44vw,360px)]" : "aspect-video";
-  const embedHeight = vertical ? "h-[clamp(420px,76vw,600px)]" : "aspect-video";
+  const frameHeight = vertical ? "aspect-[420/575] max-h-[620px]" : "aspect-video";
 
   if (active) {
     return (
-      <div className={`${embedHeight} w-full overflow-hidden rounded-[22px] bg-black`}>
+      <div className={`${frameHeight} w-full overflow-hidden rounded-[22px] bg-black`}>
         <iframe
           className="h-full w-full"
           src={EMBED[kind](videoId)}
@@ -80,7 +80,7 @@ export default function MediaFacade({
     <button
       type="button"
       onClick={() => setActive(true)}
-      className={`card-pop group relative block ${posterHeight} w-full overflow-hidden`}
+      className={`card-pop group relative block ${frameHeight} w-full overflow-hidden`}
       aria-label={`Play ${PROVIDER[kind]} video: ${title}`}
     >
       {poster ? (

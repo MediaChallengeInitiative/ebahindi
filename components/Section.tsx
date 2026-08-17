@@ -1,12 +1,23 @@
 import type { ReactNode } from "react";
+import type { Headline } from "@/content/site";
 
 type Props = {
   id: string;
   label: string;
-  heading: ReactNode;
+  heading: Headline;
   intro?: ReactNode;
   children: ReactNode;
 };
+
+/** Renders a headline with its accent clause in italic amber. */
+export function Heading({ heading, className }: { heading: Headline; className?: string }) {
+  return (
+    <span className={className}>
+      {heading.lead} <em className="accent">{heading.accent}</em>
+      {heading.tail ?? ""}
+    </span>
+  );
+}
 
 /**
  * Section shell inside Ovro's right-hand scroll column. Every section shares
@@ -22,7 +33,7 @@ export default function Section({ id, label, heading, intro, children }: Props) 
           id={`${id}-heading`}
           className="headline balance mt-4 text-[1.65rem] min-[420px]:text-[1.9rem] sm:text-4xl lg:text-[2.6rem]"
         >
-          {heading}
+          <Heading heading={heading} />
         </h2>
         {intro ? (
           <p className="pretty mt-5 max-w-prose text-[17px] leading-relaxed text-white/65">
