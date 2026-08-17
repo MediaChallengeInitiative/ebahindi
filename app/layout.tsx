@@ -1,20 +1,23 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Lora } from "next/font/google";
+import { Figtree, Playfair_Display } from "next/font/google";
 import { site, contact } from "@/content/site";
 import Reveal from "@/components/Reveal";
+import MagneticCursor from "@/components/MagneticCursor";
 import "./globals.css";
 
-const inter = Inter({
+/** Ovro's pairing: Figtree for everything, Playfair italic for accent words only. */
+const figtree = Figtree({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-figtree",
 });
 
-const lora = Lora({
+const playfair = Playfair_Display({
   subsets: ["latin"],
   display: "swap",
-  style: ["normal", "italic"],
-  variable: "--font-lora",
+  style: ["italic"],
+  weight: ["500", "600"],
+  variable: "--font-playfair",
 });
 
 export const metadata: Metadata = {
@@ -67,7 +70,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#0A1B2E",
+  themeColor: "#061D1E",
   width: "device-width",
   initialScale: 1,
 };
@@ -105,7 +108,7 @@ const personSchema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${inter.variable} ${lora.variable}`}>
+    <html lang="en" className={`${figtree.variable} ${playfair.variable}`}>
       <head>
         {/* Marks the document as JS-capable before first paint, which is what
             arms the scroll-reveal styles. See the `.js .reveal` rules. */}
@@ -120,12 +123,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           href="#main"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]
                      focus:rounded-full focus:bg-amber focus:px-5 focus:py-3 focus:text-sm
-                     focus:font-semibold focus:text-navy"
+                     focus:font-bold focus:text-ink"
         >
           Skip to content
         </a>
         {children}
         <Reveal />
+        <MagneticCursor />
         <script
           type="application/ld+json"
           // Static, author-controlled object — not user input.

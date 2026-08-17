@@ -1,49 +1,47 @@
 import type { ReactNode } from "react";
+import type { Headline } from "@/content/site";
 
 type Props = {
   id: string;
   label: string;
-  heading: ReactNode;
-  /** Dark sections invert the palette and enable `.on-dark` accent colours. */
-  tone?: "light" | "dark";
+  heading: Headline;
   intro?: ReactNode;
   children: ReactNode;
 };
 
-/**
- * Shared section shell: anchor target, small-caps label, serif heading.
- * Alternating tone is what gives the page its editorial rhythm.
- */
-export default function Section({ id, label, heading, tone = "light", intro, children }: Props) {
-  const dark = tone === "dark";
-
+/** Renders a headline with its accent clause in italic amber. */
+export function Heading({ heading, className }: { heading: Headline; className?: string }) {
   return (
-    <section
-      id={id}
-      aria-labelledby={`${id}-heading`}
-      className={dark ? "on-dark bg-navy text-white" : "bg-white text-navy"}
-    >
-      <div className="shell section">
-        <div className="reveal max-w-3xl">
-          <p className={`label ${dark ? "text-amber" : "text-amber-ink"}`}>{label}</p>
-          <h2
-            id={`${id}-heading`}
-            className="display mt-4 text-balance text-3xl sm:text-4xl lg:text-[2.75rem]"
-          >
-            {heading}
-          </h2>
-          {intro ? (
-            <div
-              className={`pretty mt-5 max-w-prose text-[17px] leading-relaxed ${
-                dark ? "text-slate-muted" : "text-navy/70"
-              }`}
-            >
-              {intro}
-            </div>
-          ) : null}
-        </div>
-        {children}
+    <span className={className}>
+      {heading.lead} <em className="accent">{heading.accent}</em>
+      {heading.tail ?? ""}
+    </span>
+  );
+}
+
+/**
+ * Section shell inside Ovro's right-hand scroll column. Every section shares
+ * one dark ground now, so rhythm comes from spacing and panel edges rather than
+ * from alternating background colours.
+ */
+export default function Section({ id, label, heading, intro, children }: Props) {
+  return (
+    <section id={id} aria-labelledby={`${id}-heading`} className="scroll-mt-24 pt-16 sm:scroll-mt-28 sm:pt-24">
+      <div className="reveal max-w-3xl">
+        <p className="label">{label}</p>
+        <h2
+          id={`${id}-heading`}
+          className="headline balance mt-4 text-[1.65rem] min-[420px]:text-[1.9rem] sm:text-4xl lg:text-[2.6rem]"
+        >
+          <Heading heading={heading} />
+        </h2>
+        {intro ? (
+          <p className="pretty mt-5 max-w-prose text-[17px] leading-relaxed text-white/65">
+            {intro}
+          </p>
+        ) : null}
       </div>
+      {children}
     </section>
   );
 }

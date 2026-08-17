@@ -14,15 +14,31 @@ export const site = {
   locale: "en_UG",
 } as const;
 
+/**
+ * Section headline, split so the accent clause can be set in italic amber.
+ * `tail` carries its own leading punctuation/space.
+ */
+export type Headline = { lead: string; accent: string; tail?: string };
+
+export const contactSection = {
+  label: "Contact",
+  heading: {
+    lead: "Let\u2019s talk about your event, your team, or your",
+    accent: "next build.",
+  } as Headline,
+};
+
 export const contact = {
   location: "Kampala, Uganda",
-  email: "bahindiemmanuel20@gmail.com",
+  email: "ebahindi@gmail.com",
   phone: "+256 773 165 989",
   phoneHref: "+256773165989",
   linkedin: "https://www.linkedin.com/in/bahindi-emmanuel-52a8181b3/",
   x: "https://x.com/Emmir256",
-  github: "https://github.com/MediaChallengeInitiative",
-  resume: "/resume.pdf",
+  github: "https://github.com/Bahindiemma?tab=repositories",
+  resume: "/emmanuel-bahindi-resume-2026.pdf",
+  /** Filename the browser saves it as, instead of the raw path. */
+  resumeFilename: "Emmanuel-Bahindi-Software-Engineer-Resume-2026.pdf",
 } as const;
 
 /** Prefilled mailto used by every "invite me to speak" CTA. */
@@ -56,7 +72,7 @@ export const hero = {
     tail: "— and I teach a continent to do the same.",
   },
   portrait: {
-    src: "/portrait.jpg",
+    src: "/emmanuel-bahindi-portrait.jpg",
     alt: "Portrait of Emmanuel Bahindi, software engineer and AI speaker based in Kampala, Uganda.",
   },
   ctas: {
@@ -75,7 +91,11 @@ export const hero = {
 
 export const about = {
   label: "About",
-  heading: "An engineer who ships with AI, and teaches others to.",
+  heading: {
+    lead: "An engineer who ships with",
+    accent: "AI",
+    tail: ", and teaches others to.",
+  } as Headline,
   body: [
     "I am a software engineer based in Kampala, Uganda, and the Founder & CEO of COTE TECH (U) LTD. I work as Multimedia Web Developer and Technical Lead of the AI Media Lab at Media Challenge Initiative.",
     "AI is not a side interest in my practice — it is how I work. I use it in production every day, and I spend as much time teaching educators and journalists to use it well as I do writing code.",
@@ -86,6 +106,8 @@ export const about = {
     years: "2019 – 2024",
   },
   address: "4th Floor, Tirupati Mazima Mall, Kabalagala, Kampala",
+  /** One-line identity for the sticky profile card. */
+  shortRole: "Software Engineer & AI Practitioner.",
   facts: [
     { value: "5+", label: "Years building software" },
     { value: "30+", label: "Projects delivered" },
@@ -101,7 +123,7 @@ export const about = {
 
 export const aiMediaLab = {
   label: "Flagship work",
-  heading: "The AI Media Lab",
+  heading: { lead: "The", accent: "AI Media Lab" } as Headline,
   project:
     "Integrating AI Competences for Fighting Disinformation into Journalism Education in Eastern Africa",
   partners: "With CAMECO • German-funded",
@@ -131,34 +153,47 @@ export type Talk = {
   title: string;
   outlet: string;
   href?: string;
-  kind: "youtube" | "podcast" | "talk";
-  /** YouTube video id, for the click-to-load facade embed. */
-  youtubeId?: string;
+  kind: "youtube" | "tiktok" | "talk";
+  /** Video id for the click-to-load facade embed. */
+  videoId?: string;
+  /** Local poster image. Vendored, never hotlinked — see MediaFacade. */
+  poster?: string;
+  /** CSS object-position for the poster crop, when the default cuts badly. */
+  posterPosition?: string;
   meta?: string;
 };
 
 export const speaking = {
   label: "Speaking & media",
-  heading: "On stage, on camera, on air.",
+  heading: { lead: "On stage, on camera,", accent: "on air." } as Headline,
   talks: [
     {
       title: "Highlight Video for the AI Journalism | AI Media Lab ToT",
       outlet: "AI Media Lab",
       href: "https://youtu.be/Xh0BSaJlHWA",
       kind: "youtube",
-      youtubeId: "Xh0BSaJlHWA",
+      videoId: "Xh0BSaJlHWA",
+      poster: "/ai-media-lab-tot-cover.jpg",
     },
     {
+      // vt.tiktok.com shorteners are not embeddable; these are the resolved
+      // canonical video ids.
       title: "AI vs Human Intelligence",
       outlet: "The Rest of Us podcast",
-      href: "https://vt.tiktok.com/ZSV21tU48/",
-      kind: "podcast",
+      href: "https://www.tiktok.com/@the_rest_of_us_256/video/7674706974071606536",
+      kind: "tiktok",
+      videoId: "7674706974071606536",
+      poster: "/tiktok-rest-of-us-cover.jpg",
     },
     {
       title: "“Starlink Is a Meaningful Disruptor”: Satellite Internet vs Africa's Telecom Giants",
       outlet: "Switch Africa",
-      href: "https://vt.tiktok.com/ZSVNrJcsK/",
-      kind: "podcast",
+      href: "https://www.tiktok.com/@switch_africa/video/7663036221840608520",
+      kind: "tiktok",
+      videoId: "7663036221840608520",
+      poster: "/tiktok-switch-africa-cover.jpg",
+      // Cover is text-heavy; frame higher so the headline is not cut mid-word.
+      posterPosition: "center 16%",
     },
     {
       title: "The Wise Man and the Clever Machine: Who Serves Whom?",
@@ -190,7 +225,7 @@ export type WorkGroup = {
 
 export const work = {
   label: "Selected work",
-  heading: "Things I have built and shipped.",
+  heading: { lead: "Things I have", accent: "built and shipped." } as Headline,
   groups: [
     {
       id: "mci",
@@ -260,12 +295,6 @@ export const work = {
           blurb: "Agricultural NGO.",
         },
         {
-          name: "NALAW Quizzes",
-          domain: "nalawquizzes.org",
-          blurb: "Legal-education quiz platform.",
-          unreachable: true,
-        },
-        {
           name: "Musawo Betty Care & Research Centre",
           href: "https://mbcrc.org",
           domain: "mbcrc.org",
@@ -290,7 +319,7 @@ export const work = {
 
 export const skills = {
   label: "Skills",
-  heading: "How I work.",
+  heading: { lead: "How I", accent: "work." } as Headline,
   groups: [
     {
       title: "AI-Native Engineering",
@@ -325,10 +354,27 @@ export const skills = {
   ],
 } as const;
 
-export const nav = [
-  { label: "About", href: "#about" },
-  { label: "AI Media Lab", href: "#ai-media-lab" },
-  { label: "Speaking", href: "#speaking" },
-  { label: "Work", href: "#work" },
-  { label: "Contact", href: "#contact" },
-] as const;
+/**
+ * The left rail doubles as the mobile menu and as the scrollspy source, so the
+ * ids here must match the section ids rendered on the page.
+ *
+ * Ovro ships Testimonial and Blog items too. Both are dropped: he has neither,
+ * and a rail entry that scrolls to invented content is worse than no entry.
+ */
+export type RailItem = {
+  id: string;
+  label: string;
+  icon: "home" | "user" | "lab" | "mic" | "grid" | "spark" | "mail";
+};
+
+export const rail: RailItem[] = [
+  { id: "top", label: "Home", icon: "home" },
+  { id: "about", label: "About", icon: "user" },
+  { id: "ai-media-lab", label: "AI Media Lab", icon: "lab" },
+  { id: "speaking", label: "Speaking", icon: "mic" },
+  { id: "work", label: "Work", icon: "grid" },
+  { id: "skills", label: "Skills", icon: "spark" },
+  { id: "contact", label: "Contact", icon: "mail" },
+];
+
+export const nav = rail.filter((item) => item.id !== "top");

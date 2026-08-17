@@ -80,7 +80,7 @@ export default function NextWord() {
 
   return (
     <span className="inline-flex items-baseline">
-      <span className="font-serif italic text-amber">{shown}</span>
+      <span className="font-display italic text-amber">{shown}</span>
       <span
         aria-hidden="true"
         className={`ml-0.5 inline-block h-[1.05em] w-[2px] translate-y-[0.13em] bg-amber ${

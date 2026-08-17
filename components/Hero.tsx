@@ -1,95 +1,95 @@
-import Image from "next/image";
 import { hero, about } from "@/content/site";
 import NextWord from "./NextWord";
+import HeroScene from "./three/HeroScene";
 
 export default function Hero() {
   return (
-    <section id="top" className="on-dark relative overflow-hidden bg-navy text-white">
-      {/* Amber wash behind the portrait */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute right-[-18%] top-[-24%] h-[720px] w-[720px] rounded-full
-                   bg-[radial-gradient(circle,rgba(255,182,39,0.16)_0%,rgba(255,182,39,0)_65%)]"
-      />
-      {/* Hairline grid, very faint */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.055]
-                   bg-[linear-gradient(to_right,#fff_1px,transparent_1px),linear-gradient(to_bottom,#fff_1px,transparent_1px)]
-                   bg-[size:72px_72px]"
-      />
+    <section id="top" aria-labelledby="hero-heading" className="pt-24 sm:pt-28 lg:pt-10">
+      <p className="label flex items-start gap-2">
+        <span
+          aria-hidden="true"
+          className="mt-[5px] inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-amber"
+        />
+        <span>{hero.identity}</span>
+      </p>
 
-      <div className="shell relative grid items-center gap-14 pb-20 pt-32 sm:pb-24 sm:pt-36 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16 lg:pb-32 lg:pt-40">
-        <div className="animate-fade-up">
-          <p className="label text-amber">{hero.identity}</p>
+      {/* Ovro's headline move: heavy sans, one word in italic amber Playfair. */}
+      <h1
+        id="hero-heading"
+        className="headline balance mt-5 text-[2rem] min-[420px]:text-[2.35rem] sm:text-[3.4rem] lg:text-[4.1rem]"
+      >
+        {hero.headline.lead} <em className="accent">{hero.headline.accent}</em>{" "}
+        {hero.headline.tail}
+      </h1>
 
-          <h1 className="display mt-6 text-balance text-[2.1rem] leading-[1.14] sm:text-5xl lg:text-[3.65rem]">
-            {hero.headline.lead} <em className="accent-italic">{hero.headline.accent}</em>{" "}
-            {hero.headline.tail}
-          </h1>
+      <div className="mt-8 grid items-center gap-8 sm:mt-10 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+        <div>
+          <p className="pretty max-w-prose text-[17px] leading-relaxed text-white/70">
+            {about.body[1]}
+          </p>
 
-          {/* Next-word prediction strip */}
-          <p className="mt-8 flex flex-wrap items-baseline gap-x-2 font-sans text-[15px] text-slate-muted">
-            <span
-              aria-hidden="true"
-              className="inline-block h-1.5 w-1.5 translate-y-[-2px] rounded-full bg-amber"
-            />
+          {/* Next-word prediction strip — the 3D object reacts to the same idea. */}
+          <p className="mt-7 flex flex-wrap items-baseline gap-x-2 text-[15px] text-white/60">
             <span>{hero.prediction.prefix}</span>
             <span aria-hidden="true">
               <NextWord />
             </span>
-            {/* Static equivalent for assistive tech. */}
             <span className="sr-only">{hero.prediction.tokens.join(", ")}.</span>
           </p>
 
-          <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-            <a href={hero.ctas.speak.href} className="btn-primary">
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
+            <a href={hero.ctas.speak.href} className="btn-amber">
               {hero.ctas.speak.label}
             </a>
-            <a href={hero.ctas.work.href} className="btn-secondary">
+            <a href={hero.ctas.work.href} className="btn-ghost">
               {hero.ctas.work.label}
             </a>
           </div>
 
-          <dl className="mt-12 flex flex-wrap gap-x-10 gap-y-5 border-t border-white/10 pt-8">
+          <dl className="mt-9 flex flex-wrap gap-x-10 gap-y-5 border-t border-line-soft pt-6 sm:gap-x-12 sm:pt-7">
             {about.facts.map((fact) => (
               <div key={fact.label}>
                 <dt className="sr-only">{fact.label}</dt>
                 <dd>
-                  <span className="block font-serif text-3xl text-amber">{fact.value}</span>
-                  <span className="mt-1 block text-[13px] text-slate-muted">{fact.label}</span>
+                  <span className="block text-3xl font-extrabold text-amber">{fact.value}</span>
+                  <span className="mt-1 block text-[13px] text-white/55">{fact.label}</span>
                 </dd>
               </div>
             ))}
           </dl>
         </div>
 
-        {/* Portrait with pulsing rings */}
-        <div className="relative mx-auto w-full max-w-[340px] lg:max-w-[420px]">
-          <div className="relative aspect-square">
-            {[0, 1, 2].map((i) => (
-              <span
-                key={i}
-                aria-hidden="true"
-                className="absolute inset-0 rounded-full border border-amber/30 animate-ring"
-                style={{ animationDelay: `${i * 1.2}s` }}
-              />
-            ))}
-            <div className="absolute inset-[6%] overflow-hidden rounded-full ring-1 ring-white/15">
-              {/* The source is a circular crop on a white square; scaling up pushes
-                  that white backing outside the mask so no ring shows. */}
-              <Image
-                src={hero.portrait.src}
-                alt={hero.portrait.alt}
-                fill
-                priority
-                sizes="(max-width: 1024px) 340px, 420px"
-                className="scale-[1.32] object-cover"
-              />
-            </div>
-          </div>
-        </div>
+        <HeroScene />
       </div>
+
+      {/* Ovro's full-width "Lets Work Together" bar. */}
+      <a
+        href={hero.ctas.speak.href}
+        className="panel group mt-10 flex items-center justify-between gap-4 px-6 py-7
+                   transition-colors hover:border-amber/40 sm:mt-12 sm:gap-6 sm:px-10 sm:py-8"
+      >
+        <span className="headline text-[1.35rem] sm:text-3xl lg:text-4xl">
+          Let&rsquo;s work <em className="accent">together</em>
+        </span>
+        <span
+          aria-hidden="true"
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border sm:h-14 sm:w-14
+                     border-line text-white transition-all duration-300
+                     group-hover:border-amber group-hover:bg-amber group-hover:text-ink"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            className="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M7 17L17 7M17 7H8M17 7v9" />
+          </svg>
+        </span>
+      </a>
     </section>
   );
 }
