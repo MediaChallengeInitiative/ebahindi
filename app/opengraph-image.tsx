@@ -1,3 +1,5 @@
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import { ImageResponse } from "next/og";
 import { site, hero } from "@/content/site";
 
@@ -6,10 +8,32 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 /**
+ * Satori ships no system fonts, so the display face must be handed over as an
+ * actual font file or the card falls back to sans and loses the serif identity.
+ * The static instances are vendored under app/fonts (Lora is OFL-licensed)
+ * rather than fetched, so builds are reproducible and need no network. Satori
+ * cannot parse variable fonts — these must stay static instances.
+ */
+async function loadLora() {
+  const dir = path.join(process.cwd(), "app", "fonts");
+  const [regular, italic] = await Promise.all([
+    readFile(path.join(dir, "Lora-Medium.ttf")),
+    readFile(path.join(dir, "Lora-MediumItalic.ttf")),
+  ]);
+
+  return [
+    { name: "Lora", data: regular, style: "normal" as const, weight: 500 as const },
+    { name: "Lora", data: italic, style: "italic" as const, weight: 500 as const },
+  ];
+}
+
+/**
  * Link preview card. This is what conference organisers see when the link is
  * pasted into WhatsApp or LinkedIn, so it leads with the brand statement.
  */
 export default async function OpengraphImage() {
+  const fonts = await loadLora();
+
   return new ImageResponse(
     (
       <div
@@ -21,7 +45,7 @@ export default async function OpengraphImage() {
           justifyContent: "space-between",
           background: "#0A1B2E",
           padding: "72px 80px",
-          fontFamily: "Georgia, serif",
+          fontFamily: "Lora, Georgia, serif",
           position: "relative",
         }}
       >
@@ -81,9 +105,13 @@ export default async function OpengraphImage() {
               maxWidth: 1000,
             }}
           >
-            {hero.headline.lead}&nbsp;
-            <span style={{ color: "#FFB627", fontStyle: "italic" }}>{hero.headline.accent}</span>
-            &nbsp;{hero.headline.tail}
+            <span style={{ display: "flex" }}>{hero.headline.lead}&nbsp;</span>
+            {/* The trailing space sits on the accent span so it collapses at a
+                line break instead of indenting the next line. */}
+            <span style={{ display: "flex", color: "#FFB627", fontStyle: "italic" }}>
+              {hero.headline.accent}&nbsp;
+            </span>
+            <span style={{ display: "flex" }}>{hero.headline.tail}</span>
           </div>
         </div>
 
@@ -107,6 +135,6 @@ export default async function OpengraphImage() {
         </div>
       </div>
     ),
-    size,
+    { ...size, fonts },
   );
 }

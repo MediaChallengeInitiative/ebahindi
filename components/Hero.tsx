@@ -76,13 +76,15 @@ export default function Hero() {
               />
             ))}
             <div className="absolute inset-[6%] overflow-hidden rounded-full ring-1 ring-white/15">
+              {/* The source is a circular crop on a white square; scaling up pushes
+                  that white backing outside the mask so no ring shows. */}
               <Image
                 src={hero.portrait.src}
                 alt={hero.portrait.alt}
                 fill
                 priority
                 sizes="(max-width: 1024px) 340px, 420px"
-                className="object-cover"
+                className="scale-[1.32] object-cover"
               />
             </div>
           </div>

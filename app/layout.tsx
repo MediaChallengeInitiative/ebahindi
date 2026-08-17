@@ -106,6 +106,15 @@ const personSchema = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${inter.variable} ${lora.variable}`}>
+      <head>
+        {/* Marks the document as JS-capable before first paint, which is what
+            arms the scroll-reveal styles. See the `.js .reveal` rules. */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `document.documentElement.classList.add('js')`,
+          }}
+        />
+      </head>
       <body>
         <a
           href="#main"

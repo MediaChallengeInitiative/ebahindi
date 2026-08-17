@@ -37,11 +37,10 @@ export default function Header() {
       }`}
     >
       <nav aria-label="Primary" className="shell flex h-[68px] items-center justify-between gap-6">
-        <a
-          href="#top"
-          className="flex items-center gap-2.5 text-white"
-          aria-label={`${site.name} — back to top`}
-        >
+        {/* No aria-label here on purpose: the visible name is already the
+            accessible name, and an aria-label that differs from visible text
+            trips WCAG 2.5.3 (Label in Name). */}
+        <a href="#top" className="flex items-center gap-2.5 text-white">
           <span
             aria-hidden="true"
             className="flex h-9 w-9 items-center justify-center rounded-lg bg-amber font-serif

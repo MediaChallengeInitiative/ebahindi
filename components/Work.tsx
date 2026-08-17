@@ -18,14 +18,13 @@ function hueFor(domain: string): number {
   return hash;
 }
 
-function initials(name: string): string {
-  return name
-    .replace(/[^A-Za-z ]/g, "")
-    .split(" ")
-    .filter(Boolean)
-    .slice(0, 2)
-    .map((w) => w[0]?.toUpperCase())
-    .join("");
+/**
+ * Two-letter mark taken from the most specific part of the domain, not the
+ * project name — three MCI sites would otherwise all read "MC".
+ */
+function markFor(domain: string): string {
+  const label = domain.split(".")[0] ?? domain;
+  return label.slice(0, 2).toUpperCase();
 }
 
 function Preview({ project }: { project: Project }) {
@@ -47,7 +46,7 @@ function Preview({ project }: { project: Project }) {
         <span className="h-2 w-2 rounded-full bg-navy/15" />
         <span className="ml-2 truncate text-[11px] font-medium text-navy/45">{project.domain}</span>
       </div>
-      <span className="mt-4 font-serif text-3xl text-navy/35">{initials(project.name)}</span>
+      <span className="mt-4 font-serif text-3xl text-navy/35">{markFor(project.domain)}</span>
     </div>
   );
 }

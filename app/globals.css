@@ -125,9 +125,12 @@
   }
 }
 
-/* Scroll-reveal: hidden until observed, then faded up.
-   Without JS (or with reduced motion) content stays fully visible. */
-.reveal {
+/* Scroll-reveal, progressively enhanced.
+   The hidden starting state is scoped to `.js`, which an inline script in the
+   document head sets before first paint. If that script never runs — JS
+   disabled, bundle blocked, a flaky mobile connection — every section renders
+   plainly visible instead of staying blank forever. */
+.js .reveal {
   opacity: 0;
   transform: translateY(20px);
   transition:
@@ -136,7 +139,7 @@
   will-change: opacity, transform;
 }
 
-.reveal.is-visible {
+.js .reveal.is-visible {
   opacity: 1;
   transform: none;
 }
@@ -146,7 +149,7 @@
     scroll-behavior: auto;
   }
 
-  .reveal {
+  .js .reveal {
     opacity: 1;
     transform: none;
     transition: none;
