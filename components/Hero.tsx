@@ -4,7 +4,7 @@ import HeroScene from "./three/HeroScene";
 
 export default function Hero() {
   return (
-    <section id="top" aria-labelledby="hero-heading" className="pt-28 lg:pt-10">
+    <section id="top" aria-labelledby="hero-heading" className="pt-24 sm:pt-28 lg:pt-10">
       <p className="label flex items-start gap-2">
         <span
           aria-hidden="true"
@@ -16,13 +16,13 @@ export default function Hero() {
       {/* Ovro's headline move: heavy sans, one word in italic amber Playfair. */}
       <h1
         id="hero-heading"
-        className="headline balance mt-6 text-[2.35rem] sm:text-[3.4rem] lg:text-[4.1rem]"
+        className="headline balance mt-5 text-[2rem] min-[420px]:text-[2.35rem] sm:text-[3.4rem] lg:text-[4.1rem]"
       >
         {hero.headline.lead} <em className="accent">{hero.headline.accent}</em>{" "}
         {hero.headline.tail}
       </h1>
 
-      <div className="mt-10 grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="mt-8 grid items-center gap-8 sm:mt-10 sm:gap-10 lg:grid-cols-[1.05fr_0.95fr]">
         <div>
           <p className="pretty max-w-prose text-[17px] leading-relaxed text-white/70">
             {about.body[1]}
@@ -46,7 +46,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <dl className="mt-10 flex flex-wrap gap-x-12 gap-y-5 border-t border-line-soft pt-7">
+          <dl className="mt-9 flex flex-wrap gap-x-10 gap-y-5 border-t border-line-soft pt-6 sm:gap-x-12 sm:pt-7">
             {about.facts.map((fact) => (
               <div key={fact.label}>
                 <dt className="sr-only">{fact.label}</dt>
@@ -65,15 +65,15 @@ export default function Hero() {
       {/* Ovro's full-width "Lets Work Together" bar. */}
       <a
         href={hero.ctas.speak.href}
-        className="panel group mt-12 flex items-center justify-between gap-6 px-7 py-8
-                   transition-colors hover:border-amber/40 sm:px-10"
+        className="panel group mt-10 flex items-center justify-between gap-4 px-6 py-7
+                   transition-colors hover:border-amber/40 sm:mt-12 sm:gap-6 sm:px-10 sm:py-8"
       >
-        <span className="headline text-2xl sm:text-4xl">
+        <span className="headline text-[1.35rem] sm:text-3xl lg:text-4xl">
           Let&rsquo;s work <em className="accent">together</em>
         </span>
         <span
           aria-hidden="true"
-          className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full border
+          className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border sm:h-14 sm:w-14
                      border-line text-white transition-all duration-300
                      group-hover:border-amber group-hover:bg-amber group-hover:text-ink"
         >

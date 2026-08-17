@@ -15,12 +15,12 @@ const socials = [
  */
 export default function Contact() {
   return (
-    <section id="contact" aria-labelledby="contact-heading" className="scroll-mt-28 pt-20 sm:pt-24">
+    <section id="contact" aria-labelledby="contact-heading" className="scroll-mt-24 pt-16 sm:scroll-mt-28 sm:pt-24">
       <div className="reveal max-w-3xl">
         <p className="label">Contact</p>
         <h2
           id="contact-heading"
-          className="headline balance mt-4 text-[1.9rem] sm:text-4xl lg:text-[2.6rem]"
+          className="headline balance mt-4 text-[1.65rem] min-[420px]:text-[1.9rem] sm:text-4xl lg:text-[2.6rem]"
         >
           Let&rsquo;s talk about your event, your team, or your{" "}
           <em className="accent">next build.</em>
@@ -28,7 +28,7 @@ export default function Contact() {
       </div>
 
       <div className="mt-10 grid gap-6 lg:grid-cols-2">
-        <div className="reveal panel p-7 sm:p-8">
+        <div className="reveal panel p-6 sm:p-8">
           <dl className="space-y-6">
             <div>
               <dt className="label">Email</dt>
@@ -59,12 +59,12 @@ export default function Contact() {
           </dl>
         </div>
 
-        <div className="reveal panel p-7 sm:p-8" style={{ transitionDelay: "90ms" }}>
+        <div className="reveal panel p-6 sm:p-8" style={{ transitionDelay: "90ms" }}>
           <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
             <a href={speakingMailto} className="btn-amber">
               {hero.ctas.speak.label}
             </a>
-            <a href={contact.resume} className="btn-ghost" download>
+            <a href={contact.resume} className="btn-ghost" download={contact.resumeFilename}>
               Download Résumé
             </a>
           </div>

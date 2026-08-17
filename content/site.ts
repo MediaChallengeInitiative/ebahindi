@@ -16,13 +16,15 @@ export const site = {
 
 export const contact = {
   location: "Kampala, Uganda",
-  email: "bahindiemmanuel20@gmail.com",
+  email: "ebahindi@gmail.com",
   phone: "+256 773 165 989",
   phoneHref: "+256773165989",
   linkedin: "https://www.linkedin.com/in/bahindi-emmanuel-52a8181b3/",
   x: "https://x.com/Emmir256",
-  github: "https://github.com/MediaChallengeInitiative",
-  resume: "/resume.pdf",
+  github: "https://github.com/Bahindiemma?tab=repositories",
+  resume: "/emmanuel-bahindi-resume-2026.pdf",
+  /** Filename the browser saves it as, instead of the raw path. */
+  resumeFilename: "Emmanuel-Bahindi-Software-Engineer-Resume-2026.pdf",
 } as const;
 
 /** Prefilled mailto used by every "invite me to speak" CTA. */
@@ -56,7 +58,7 @@ export const hero = {
     tail: "— and I teach a continent to do the same.",
   },
   portrait: {
-    src: "/portrait.jpg",
+    src: "/emmanuel-bahindi-portrait.jpg",
     alt: "Portrait of Emmanuel Bahindi, software engineer and AI speaker based in Kampala, Uganda.",
   },
   ctas: {
@@ -86,6 +88,8 @@ export const about = {
     years: "2019 – 2024",
   },
   address: "4th Floor, Tirupati Mazima Mall, Kabalagala, Kampala",
+  /** One-line identity for the sticky profile card. */
+  shortRole: "Software Engineer & AI Practitioner.",
   facts: [
     { value: "5+", label: "Years building software" },
     { value: "30+", label: "Projects delivered" },
@@ -131,9 +135,11 @@ export type Talk = {
   title: string;
   outlet: string;
   href?: string;
-  kind: "youtube" | "podcast" | "talk";
-  /** YouTube video id, for the click-to-load facade embed. */
-  youtubeId?: string;
+  kind: "youtube" | "tiktok" | "talk";
+  /** Video id for the click-to-load facade embed. */
+  videoId?: string;
+  /** Local poster. TikTok posters are drawn instead — see MediaFacade. */
+  poster?: string;
   meta?: string;
 };
 
@@ -146,19 +152,24 @@ export const speaking = {
       outlet: "AI Media Lab",
       href: "https://youtu.be/Xh0BSaJlHWA",
       kind: "youtube",
-      youtubeId: "Xh0BSaJlHWA",
+      videoId: "Xh0BSaJlHWA",
+      poster: "/ai-media-lab-tot-cover.jpg",
     },
     {
+      // vt.tiktok.com shorteners are not embeddable; these are the resolved
+      // canonical video ids.
       title: "AI vs Human Intelligence",
       outlet: "The Rest of Us podcast",
-      href: "https://vt.tiktok.com/ZSV21tU48/",
-      kind: "podcast",
+      href: "https://www.tiktok.com/@the_rest_of_us_256/video/7674706974071606536",
+      kind: "tiktok",
+      videoId: "7674706974071606536",
     },
     {
       title: "“Starlink Is a Meaningful Disruptor”: Satellite Internet vs Africa's Telecom Giants",
       outlet: "Switch Africa",
-      href: "https://vt.tiktok.com/ZSVNrJcsK/",
-      kind: "podcast",
+      href: "https://www.tiktok.com/@switch_africa/video/7663036221840608520",
+      kind: "tiktok",
+      videoId: "7663036221840608520",
     },
     {
       title: "The Wise Man and the Clever Machine: Who Serves Whom?",
@@ -258,12 +269,6 @@ export const work = {
           href: "https://www.tapagric.org",
           domain: "tapagric.org",
           blurb: "Agricultural NGO.",
-        },
-        {
-          name: "NALAW Quizzes",
-          domain: "nalawquizzes.org",
-          blurb: "Legal-education quiz platform.",
-          unreachable: true,
         },
         {
           name: "Musawo Betty Care & Research Centre",

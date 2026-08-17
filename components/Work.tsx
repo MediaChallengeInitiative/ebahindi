@@ -56,7 +56,7 @@ function Card({ project, index }: { project: Project; index: number }) {
   const inner = (
     <>
       <Preview project={project} />
-      <div className="flex flex-1 flex-col p-5">
+      <div className="flex flex-1 flex-col p-4 sm:p-5">
         <h4 className="text-[16px] font-bold leading-snug">{project.name}</h4>
         <p className="mt-1.5 flex-1 text-[14px] leading-relaxed text-white/60">{project.blurb}</p>
         <span className="mt-4 inline-flex items-center gap-1.5 text-[13px] font-bold text-amber">
@@ -124,7 +124,7 @@ export default function Work() {
         </>
       }
     >
-      <div className="mt-10 space-y-12">
+      <div className="mt-8 space-y-10 sm:mt-10 sm:space-y-12">
         {work.groups.map((group) => (
           <div key={group.id}>
             <div className="reveal flex flex-wrap items-baseline gap-x-4 gap-y-1 border-b border-line-soft pb-4">

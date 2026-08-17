@@ -14,7 +14,7 @@ export default function AIMediaLab() {
       }
       intro={aiMediaLab.intro}
     >
-      <div className="reveal mt-10 rounded-3xl border border-amber/25 bg-amber/[0.06] p-6 sm:p-8">
+      <div className="reveal mt-8 rounded-3xl border border-amber/25 bg-amber/[0.06] p-5 sm:mt-10 sm:p-8">
         <p className="label">Programme</p>
         <p className="pretty mt-3 max-w-4xl text-xl font-bold leading-snug sm:text-2xl">
           {aiMediaLab.project}
@@ -26,7 +26,7 @@ export default function AIMediaLab() {
         {aiMediaLab.contributions.map((item, i) => (
           <li
             key={item.title}
-            className="reveal card flex flex-col p-6 hover:border-amber/40"
+            className="reveal card flex flex-col p-5 sm:p-6 hover:border-amber/40"
             style={{ transitionDelay: `${i * 90}ms` }}
           >
             <span aria-hidden="true" className="text-2xl font-extrabold text-amber/50">

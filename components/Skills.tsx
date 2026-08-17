@@ -28,9 +28,9 @@ export default function Skills() {
         </>
       }
     >
-      <div className="mt-10 grid auto-rows-min gap-5 md:grid-cols-3">
+      <div className="mt-8 grid auto-rows-min gap-4 sm:mt-10 sm:gap-5 md:grid-cols-3">
         {/* Wide cell — the positioning claim */}
-        <div className="reveal card p-7 md:col-span-2 hover:border-amber/40">
+        <div className="reveal card p-6 sm:p-7 md:col-span-2 hover:border-amber/40">
           <h3 className="text-xl font-extrabold">{ai.title}</h3>
           <p className="mt-2 text-[15px] text-white/60">{ai.blurb}</p>
           <ul className="mt-6 flex flex-wrap gap-2.5">
@@ -45,7 +45,7 @@ export default function Skills() {
         {/* 3D cell */}
         <div
           ref={ref}
-          className="reveal card relative min-h-[220px] overflow-hidden p-7 hover:border-amber/40"
+          className="reveal card relative min-h-[200px] overflow-hidden p-6 sm:min-h-[220px] sm:p-7 hover:border-amber/40"
           style={{ transitionDelay: "80ms" }}
         >
           <div aria-hidden="true" className="absolute inset-0 opacity-55">
@@ -66,7 +66,7 @@ export default function Skills() {
 
         {/* Stack cell — wide, because it carries the most tags */}
         <div
-          className="reveal card p-7 md:col-span-2 hover:border-amber/40"
+          className="reveal card p-6 sm:p-7 md:col-span-2 hover:border-amber/40"
           style={{ transitionDelay: "40ms" }}
         >
           <h3 className="text-xl font-extrabold">{stack.title}</h3>
@@ -85,7 +85,7 @@ export default function Skills() {
           {[about.facts[1], aiMediaLab.reach].map((stat, i) => (
             <div
               key={stat.label}
-              className="reveal card p-7 hover:border-amber/40"
+              className="reveal card p-6 sm:p-7 hover:border-amber/40"
               style={{ transitionDelay: `${80 + i * 40}ms` }}
             >
               <span className="block text-4xl font-extrabold text-amber">{stat.value}</span>

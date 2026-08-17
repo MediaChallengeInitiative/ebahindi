@@ -18,15 +18,13 @@ const HeroBlob = dynamic(() => import("./HeroBlob"), { ssr: false });
 function PortraitFallback() {
   return (
     <div className="absolute inset-[8%] overflow-hidden rounded-full ring-1 ring-line">
-      {/* Source is a circular crop on a white square; scaling pushes that
-          white backing outside the circular mask. */}
       <Image
         src={hero.portrait.src}
         alt={hero.portrait.alt}
         fill
         priority
         sizes="(max-width: 1024px) 320px, 440px"
-        className="scale-[1.32] object-cover"
+        className="object-cover object-[center_18%]"
       />
     </div>
   );

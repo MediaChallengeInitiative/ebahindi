@@ -45,8 +45,10 @@ export default function Header() {
           >
             {site.monogram}
           </span>
-          {/* Hidden on the narrowest screens so the header never wraps. */}
-          <span className="hidden text-lg font-extrabold tracking-tight sm:inline">
+          {/* Visually hidden on the narrowest screens so the header never wraps,
+              but never removed: the monogram is aria-hidden, so this text is the
+              link's only accessible name. */}
+          <span className="sr-only text-lg font-extrabold tracking-tight sm:not-sr-only">
             {site.name}
           </span>
         </a>

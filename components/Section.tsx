@@ -15,12 +15,12 @@ type Props = {
  */
 export default function Section({ id, label, heading, intro, children }: Props) {
   return (
-    <section id={id} aria-labelledby={`${id}-heading`} className="scroll-mt-28 pt-20 sm:pt-24">
+    <section id={id} aria-labelledby={`${id}-heading`} className="scroll-mt-24 pt-16 sm:scroll-mt-28 sm:pt-24">
       <div className="reveal max-w-3xl">
         <p className="label">{label}</p>
         <h2
           id={`${id}-heading`}
-          className="headline balance mt-4 text-[1.9rem] sm:text-4xl lg:text-[2.6rem]"
+          className="headline balance mt-4 text-[1.65rem] min-[420px]:text-[1.9rem] sm:text-4xl lg:text-[2.6rem]"
         >
           {heading}
         </h2>

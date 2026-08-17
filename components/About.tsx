@@ -12,7 +12,7 @@ export default function About() {
         </>
       }
     >
-      <div className="mt-10 grid gap-6 lg:grid-cols-[1.05fr_0.95fr]">
+      <div className="mt-8 grid gap-5 sm:mt-10 sm:gap-6 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="reveal space-y-5">
           {about.body.map((paragraph) => (
             <p key={paragraph} className="pretty text-[16px] leading-relaxed text-white/70">
@@ -26,13 +26,13 @@ export default function About() {
 
         <div className="reveal space-y-4" style={{ transitionDelay: "90ms" }}>
           {about.roles.map((role) => (
-            <div key={role.org} className="card p-6 hover:border-amber/40">
+            <div key={role.org} className="card p-5 sm:p-6 hover:border-amber/40">
               <p className="label">{role.org}</p>
               <p className="mt-2.5 text-[18px] font-bold leading-snug">{role.role}</p>
             </div>
           ))}
 
-          <div className="card p-6 hover:border-amber/40">
+          <div className="card p-5 sm:p-6 hover:border-amber/40">
             <p className="label">Education</p>
             <p className="mt-2.5 text-[18px] font-bold leading-snug">{about.education.degree}</p>
             <p className="mt-1.5 text-[14px] text-white/60">

@@ -40,20 +40,21 @@ export default function ProfileCard() {
   return (
     <aside className="panel p-6">
       <div className="relative mx-auto aspect-square w-full max-w-[240px] overflow-hidden rounded-2xl">
+        {/* Real full-bleed studio portrait, so no scale hack is needed. The
+            focal point is biased upward so a square crop keeps the face. */}
         <Image
           src={hero.portrait.src}
           alt={hero.portrait.alt}
           fill
-          sizes="240px"
-          className="scale-[1.3] object-cover"
+          sizes="(max-width: 1024px) 240px, 240px"
+          className="object-cover object-[center_18%]"
         />
       </div>
 
       <h2 className="mt-6 text-center text-2xl font-extrabold">{site.formalName}</h2>
 
-      <p className="pretty mt-3 text-center text-[14px] leading-relaxed text-white/65">
-        {about.roles[1].role} at {about.roles[1].org}, and Founder &amp; CEO of{" "}
-        {about.roles[0].org}.
+      <p className="pretty mt-3 text-center text-[15px] leading-relaxed text-white/70">
+        {about.shortRole}
       </p>
 
       <ul className="mt-6 flex items-center justify-center gap-3">
@@ -63,7 +64,7 @@ export default function ProfileCard() {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex h-11 w-11 items-center justify-center rounded-full border border-line
+              className="flex h-12 w-12 items-center justify-center rounded-full border border-line
                          text-white/80 transition-colors hover:border-amber hover:text-amber"
             >
               <svg
@@ -84,7 +85,7 @@ export default function ProfileCard() {
         ))}
       </ul>
 
-      <a href={contact.resume} download className="btn-amber mt-6 w-full">
+      <a href={contact.resume} download={contact.resumeFilename} className="btn-amber mt-6 w-full">
         Download Résumé
         <svg
           aria-hidden="true"
