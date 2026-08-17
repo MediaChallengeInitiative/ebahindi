@@ -175,10 +175,19 @@ podcast appearances — through a shared click-to-load facade (`components/Media
 Nothing third-party loads until the visitor presses play, which is what keeps three
 embeds on one page off the performance budget.
 
-The YouTube facade uses a real poster (`public/ai-media-lab-tot-cover.jpg`, a photo from
-the Lab). The TikTok facades use **drawn** posters, because TikTok's oEmbed thumbnail URLs
-are signed and time-limited (`x-expires=…`) — hotlinking them would guarantee broken tiles
-once they expire.
+**Every card carries a real cover image**, and all of them are **vendored locally**:
+
+| Card | Poster |
+|---|---|
+| AI Media Lab ToT | `ai-media-lab-tot-cover.jpg` — a photo from the Lab |
+| The Rest of Us | `tiktok-rest-of-us-cover.jpg` — the episode's own frame |
+| Switch Africa | `tiktok-switch-africa-cover.jpg` — the episode's own cover graphic |
+
+The TikTok frames came from TikTok's oEmbed endpoint but are **downloaded, not
+hotlinked**: those thumbnail URLs are signed and time-limited (`x-expires=…`), so linking
+them directly would leave blank cards the moment they lapse. To refresh one, re-fetch
+`https://www.tiktok.com/oembed?url=<video url>`, download `thumbnail_url`, and replace the
+file in `public/`.
 
 The Rotary Club talk has no recording, so it stays a text card rather than a play button
 that goes nowhere.
@@ -207,8 +216,8 @@ Verified against a production build with Lighthouse (mobile emulation):
 - Semantic landmarks, a skip link, labelled sections, real `alt` text everywhere,
   keyboard navigable with a visible focus ring on both light and dark grounds.
 - `npm audit` reports **0 vulnerabilities**.
-- All three media embeds use a **facade**: nothing third-party loads until play is
-  pressed.
+- All three media embeds use a **facade** over a real, locally-hosted poster: nothing
+  third-party loads until play is pressed.
 - No horizontal scroll at 360 / 768 / 1280 px.
 
 Layout was tested at all three widths in a real browser. Cumulative Layout Shift is 0.

@@ -89,7 +89,8 @@ export default function Speaking() {
                 videoId={clip.videoId!}
                 title={clip.title}
                 outlet={clip.outlet}
-                sizes="(max-width: 640px) 320px, 360px"
+                poster={clip.poster}
+                sizes="(max-width: 640px) 320px, 400px"
               />
               <Caption talk={clip} />
             </figure>

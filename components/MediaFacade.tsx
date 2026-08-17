@@ -9,9 +9,8 @@ type Props = {
   videoId: string;
   title: string;
   outlet: string;
-  /** Local poster image. Omitted for TikTok, which gets a drawn poster. */
+  /** Local poster image. Always supplied for real talks. */
   poster?: string;
-  /** Sizes hint for the poster image; ignored when there is no poster. */
   sizes?: string;
 };
 
@@ -20,16 +19,22 @@ const EMBED: Record<Props["kind"], (id: string) => string> = {
   tiktok: (id) => `https://www.tiktok.com/embed/v2/${id}`,
 };
 
+const PROVIDER: Record<Props["kind"], string> = {
+  youtube: "YouTube",
+  tiktok: "TikTok",
+};
+
 /**
  * Click-to-load embed for YouTube and TikTok.
  *
  * Nothing third-party loads until the visitor asks for it: a YouTube player is
- * ~1MB and a TikTok iframe is heavier still, and there are three of them on this
- * page. Mounting them eagerly would undo the performance work entirely.
+ * ~1MB and a TikTok iframe is heavier still, and there are three on this page.
+ * Mounting them eagerly would undo the performance work entirely.
  *
- * TikTok posters are drawn rather than fetched. TikTok's oEmbed thumbnail URLs
- * are signed and time-limited (`x-expires=...`), so hotlinking them guarantees
- * broken tiles later — the same failure mode the project preview cards avoid.
+ * Posters are **vendored, never hotlinked**. TikTok's oEmbed thumbnail URLs are
+ * signed and time-limited (`x-expires=…`), so linking them directly would leave
+ * blank cards the moment they lapse. The real frames were downloaded and now
+ * live in `public/`.
  */
 export default function MediaFacade({ kind, videoId, title, outlet, poster, sizes }: Props) {
   const [active, setActive] = useState(false);
@@ -55,8 +60,8 @@ export default function MediaFacade({ kind, videoId, title, outlet, poster, size
       type="button"
       onClick={() => setActive(true)}
       className={`group relative block ${frame} w-full overflow-hidden rounded-xl
-                  border border-line-soft bg-teal-900`}
-      aria-label={`Play ${kind === "tiktok" ? "TikTok video" : "video"}: ${title}`}
+                  border border-line-soft bg-teal-800`}
+      aria-label={`Play ${PROVIDER[kind]} video: ${title}`}
     >
       {poster ? (
         <Image
@@ -64,27 +69,34 @@ export default function MediaFacade({ kind, videoId, title, outlet, poster, size
           alt=""
           fill
           sizes={sizes ?? "(max-width: 1024px) 100vw, 760px"}
-          className="object-cover transition duration-500 group-hover:scale-[1.03]"
+          className="object-cover transition duration-500 group-hover:scale-[1.04]"
         />
       ) : (
-        // Drawn poster: teal ground, amber wash, outlet name.
-        <span aria-hidden="true" className="absolute inset-0">
-          <span className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,rgba(255,174,0,0.20)_0%,rgba(255,174,0,0)_62%)]" />
-          <span className="absolute inset-x-0 bottom-0 p-4 text-left">
-            <span className="block text-[11px] font-bold uppercase tracking-label text-amber">
-              TikTok
-            </span>
-            <span className="mt-1 block text-[15px] font-bold text-white">{outlet}</span>
-          </span>
-        </span>
+        // Fallback only — every current talk ships a real poster.
+        <span
+          aria-hidden="true"
+          className="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(255,174,0,0.22)_0%,rgba(255,174,0,0)_65%)]"
+        />
       )}
 
+      {/* Light scrim: enough to keep the play button and label legible without
+          washing the frame out. */}
       <span
         aria-hidden="true"
-        className={`absolute inset-0 transition-colors ${
-          poster ? "bg-teal-900/45 group-hover:bg-teal-900/25" : "bg-transparent"
-        }`}
+        className="absolute inset-0 bg-teal-900/25 transition-colors group-hover:bg-teal-900/10"
       />
+
+      {/* Bottom gradient + provider/outlet, so a card is always readable as a
+          specific thing rather than an anonymous tile. */}
+      <span
+        aria-hidden="true"
+        className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-teal-900 via-teal-900/70 to-transparent p-4 pt-10 text-left"
+      >
+        <span className="block text-[10px] font-bold uppercase tracking-label text-amber">
+          {PROVIDER[kind]}
+        </span>
+        <span className="mt-1 block text-[14px] font-bold leading-snug text-white">{outlet}</span>
+      </span>
 
       <span
         aria-hidden="true"

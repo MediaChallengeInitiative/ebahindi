@@ -27,7 +27,7 @@ kebab-case, web-meaningful names as they are vendored in.
 | Source | Repo path | Processing |
 |---|---|---|
 | `~/Downloads/Emmanuel_Bahindi_-_Software_Engineer_-_Resume_2026.pdf` | `public/emmanuel-bahindi-resume-2026.pdf` | none (2 pages, 174 KB) |
-| `~/Downloads/ebahindi.jpg` | `public/portrait.jpg` | 853×1280 → **666×1000**, quality-capped |
+| `~/Downloads/ebahindi.jpg` | `public/emmanuel-bahindi-portrait.jpg` | 853×1280 → **666×1000**, quality-capped |
 | `~/Downloads/AI MEDIA LAB PHOTOES/AI.jpg` | `public/ai-media-lab-tot-cover.jpg` | 6000×4000 → centre-crop **16:9** → **1600×900** |
 
 **The résumé is no longer a placeholder.** Remove the "replace this file" note from the
@@ -65,14 +65,21 @@ Starlink / Switch Africa   @switch_africa       7663036221840608520
 
 Embed URL: `https://www.tiktok.com/embed/v2/{videoId}` — vertical, treat as **9:16**.
 
-### Posters: drawn, not hotlinked
+### Posters: real frames, downloaded not hotlinked
 
-TikTok's oEmbed returns a thumbnail, but the URL is **signed and expires**
-(`x-expires=1787140800`). Hotlinking it guarantees dead images later — the exact failure
-this project already rules out — and the CDN host does not even resolve from every
-network. So TikTok facades use **designed posters** in the teal/amber system, matching the
-drawn project-preview cards. The YouTube facade keeps a real poster because a genuine
-local photo now exists for it.
+Every card carries a real cover image. TikTok's oEmbed returns the episode thumbnail, but
+the URL is **signed and expires** (`x-expires=…`), so it is downloaded and vendored into
+`public/` rather than linked. Hotlinking would leave blank cards the moment the signature
+lapses — the exact failure this project already rules out elsewhere.
+
+| Card | Poster |
+|---|---|
+| AI Media Lab ToT | `ai-media-lab-tot-cover.jpg` (local photo, 16:9) |
+| The Rest of Us | `tiktok-rest-of-us-cover.jpg` (episode frame, 540×960) |
+| Switch Africa | `tiktok-switch-africa-cover.jpg` (episode cover, 720×960) |
+
+Each facade also carries a bottom gradient with the provider and outlet, so a card is
+always readable as a specific thing rather than an anonymous tile.
 
 ### Keep the facade pattern
 
@@ -129,4 +136,4 @@ Below `lg` the site is a single stack, so the work is in density and touch ergon
 All content edits land in `content/site.ts` — component files change only where structure
 or layout genuinely changes (the new media facade, the removed scale hack, mobile
 spacing). Update `README.md` to drop the résumé and GitHub items from "needs action" and
-to record why TikTok posters are drawn.
+to record that media posters are vendored rather than hotlinked.

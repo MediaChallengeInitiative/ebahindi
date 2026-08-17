@@ -138,7 +138,7 @@ export type Talk = {
   kind: "youtube" | "tiktok" | "talk";
   /** Video id for the click-to-load facade embed. */
   videoId?: string;
-  /** Local poster. TikTok posters are drawn instead — see MediaFacade. */
+  /** Local poster image. Vendored, never hotlinked — see MediaFacade. */
   poster?: string;
   meta?: string;
 };
@@ -163,6 +163,7 @@ export const speaking = {
       href: "https://www.tiktok.com/@the_rest_of_us_256/video/7674706974071606536",
       kind: "tiktok",
       videoId: "7674706974071606536",
+      poster: "/tiktok-rest-of-us-cover.jpg",
     },
     {
       title: "“Starlink Is a Meaningful Disruptor”: Satellite Internet vs Africa's Telecom Giants",
@@ -170,6 +171,7 @@ export const speaking = {
       href: "https://www.tiktok.com/@switch_africa/video/7663036221840608520",
       kind: "tiktok",
       videoId: "7663036221840608520",
+      poster: "/tiktok-switch-africa-cover.jpg",
     },
     {
       title: "The Wise Man and the Clever Machine: Who Serves Whom?",
