@@ -11,6 +11,8 @@ type Props = {
   outlet: string;
   /** Local poster image. Always supplied for real talks. */
   poster?: string;
+  /** Overrides the default crop focal point. */
+  posterPosition?: string;
   sizes?: string;
 };
 
@@ -36,14 +38,33 @@ const PROVIDER: Record<Props["kind"], string> = {
  * blank cards the moment they lapse. The real frames were downloaded and now
  * live in `public/`.
  */
-export default function MediaFacade({ kind, videoId, title, outlet, poster, sizes }: Props) {
+export default function MediaFacade({
+  kind,
+  videoId,
+  title,
+  outlet,
+  poster,
+  posterPosition,
+  sizes,
+}: Props) {
   const [active, setActive] = useState(false);
   const vertical = kind === "tiktok";
-  const frame = vertical ? "aspect-[9/16]" : "aspect-video";
+
+  /**
+   * Heights are clamped rather than derived from an aspect ratio. A 9:16 frame
+   * ties height to column width, which is exactly what made these cards 700px
+   * tall in a two-column grid.
+   *
+   * The poster only has to identify the episode and be clickable, so it is a
+   * compact card. The embed grows on play — a user-initiated size change is
+   * expected; an unplayably short video is not.
+   */
+  const posterHeight = vertical ? "h-[clamp(240px,44vw,360px)]" : "aspect-video";
+  const embedHeight = vertical ? "h-[clamp(420px,76vw,600px)]" : "aspect-video";
 
   if (active) {
     return (
-      <div className={`${frame} w-full overflow-hidden rounded-xl bg-black`}>
+      <div className={`${embedHeight} w-full overflow-hidden rounded-[22px] bg-black`}>
         <iframe
           className="h-full w-full"
           src={EMBED[kind](videoId)}
@@ -59,8 +80,7 @@ export default function MediaFacade({ kind, videoId, title, outlet, poster, size
     <button
       type="button"
       onClick={() => setActive(true)}
-      className={`group relative block ${frame} w-full overflow-hidden rounded-xl
-                  border border-line-soft bg-teal-800`}
+      className={`card-pop group relative block ${posterHeight} w-full overflow-hidden`}
       aria-label={`Play ${PROVIDER[kind]} video: ${title}`}
     >
       {poster ? (
@@ -69,6 +89,7 @@ export default function MediaFacade({ kind, videoId, title, outlet, poster, size
           alt=""
           fill
           sizes={sizes ?? "(max-width: 1024px) 100vw, 760px"}
+          style={{ objectPosition: posterPosition ?? "center 28%" }}
           className="object-cover transition duration-500 group-hover:scale-[1.04]"
         />
       ) : (
@@ -100,7 +121,7 @@ export default function MediaFacade({ kind, videoId, title, outlet, poster, size
 
       <span
         aria-hidden="true"
-        className="absolute left-1/2 top-1/2 flex h-16 w-16 -translate-x-1/2 -translate-y-1/2
+        className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 sm:h-16 sm:w-16
                    items-center justify-center rounded-full bg-amber shadow-lg
                    transition duration-300 group-hover:scale-110"
       >

@@ -192,6 +192,43 @@ file in `public/`.
 The Rotary Club talk has no recording, so it stays a text card rather than a play button
 that goes nowhere.
 
+### Card system
+
+Adapted from [pubitygroup.com](https://www.pubitygroup.com/) — see
+[`docs/CARD-SYSTEM-BRIEF.md`](docs/CARD-SYSTEM-BRIEF.md). Two weights:
+
+- **`.card-pop`** — interactive cards (media facades, project cards). Chunky 22px radius,
+  3px accent border, and a **hard, un-blurred slab of accent colour** offset 8px/9px behind
+  the card. On hover the card translates into its own shadow; on press it seats fully.
+  That offset slab is Pubity's signature move.
+- **`.card-quiet`** — static information cards (about, skills, stats, the Rotary talk).
+  Same radius, 1px hairline border, no slab. A wall of amber slabs would flatten the
+  hierarchy that makes the interactive cards read as clickable.
+
+Pubity does this in `#FFEB00` on charcoal; it is rendered here in the site's existing
+amber on teal so the OG image, favicon, rail and buttons stay coherent. Switching to the
+literal Pubity palette is four token values in `tailwind.config.ts`.
+
+### Media card sizing
+
+TikTok embeds are vertical, and a `9:16` frame made the poster cards ~711px tall — taller
+than most phone viewports. Heights are now **clamped rather than derived from an aspect
+ratio**, because an aspect ratio ties height to column width, which is what went wrong in
+a two-column grid:
+
+| State | Height | At 360px | At 1280px |
+|---|---|---|---|
+| TikTok poster | `clamp(240px, 44vw, 360px)` | 240px | 360px |
+| TikTok embed (after play) | `clamp(420px, 76vw, 600px)` | 420px | 600px |
+| YouTube | `aspect-video` | — | — |
+
+The poster only has to identify the episode and be clicked, so it is compact; the embed
+grows on play, because a user-initiated size change is expected but an unplayable video is
+not. `clamp()` means one rule covers 360px to 1440px with no breakpoint jumps.
+
+Each poster can override its crop focal point (`posterPosition`) — the Switch Africa cover
+is text-heavy and needed framing higher so its headline is not cut mid-word.
+
 ### Project preview cards
 
 The work cards are **drawn, not fetched**. A build-time screenshot pipeline would put a

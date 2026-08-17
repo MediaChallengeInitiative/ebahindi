@@ -140,6 +140,8 @@ export type Talk = {
   videoId?: string;
   /** Local poster image. Vendored, never hotlinked — see MediaFacade. */
   poster?: string;
+  /** CSS object-position for the poster crop, when the default cuts badly. */
+  posterPosition?: string;
   meta?: string;
 };
 
@@ -172,6 +174,8 @@ export const speaking = {
       kind: "tiktok",
       videoId: "7663036221840608520",
       poster: "/tiktok-switch-africa-cover.jpg",
+      // Cover is text-heavy; frame higher so the headline is not cut mid-word.
+      posterPosition: "center 16%",
     },
     {
       title: "The Wise Man and the Clever Machine: Who Serves Whom?",

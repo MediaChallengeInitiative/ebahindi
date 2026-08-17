@@ -11,7 +11,7 @@ const KIND_LABEL: Record<Talk["kind"], string> = {
 /** A talk with no recording — rendered as a card, never a dead play button. */
 function TalkCard({ talk }: { talk: Talk }) {
   return (
-    <div className="reveal card p-5 sm:p-6">
+    <div className="reveal card-quiet p-5 sm:p-6">
       <div className="flex flex-wrap items-center gap-3">
         <span className="tag !py-1 !text-[10px] font-bold uppercase tracking-label !text-amber">
           {KIND_LABEL[talk.kind]}
@@ -68,19 +68,20 @@ export default function Speaking() {
             title={featured.title}
             outlet={featured.outlet}
             poster={featured.poster}
+            posterPosition={featured.posterPosition}
             sizes="(max-width: 1024px) 100vw, 760px"
           />
           <Caption talk={featured} />
         </figure>
       ) : null}
 
-      {/* TikTok clips are vertical, so they get their own narrow pair and are
-          capped so a 9:16 frame never runs past a phone viewport. */}
-      <ul className="mt-8 grid gap-6 sm:grid-cols-2">
+      {/* Compact posters in a pair. The gap accommodates the hard offset shadow
+          (8px x / 9px y) so neighbouring cards never sit under a slab. */}
+      <ul className="mt-8 grid gap-y-8 gap-x-6 sm:grid-cols-2">
         {clips.map((clip, i) => (
           <li
             key={clip.videoId}
-            className="reveal mx-auto w-full max-w-[320px] sm:max-w-none"
+            className="reveal w-full"
             style={{ transitionDelay: `${i * 90}ms` }}
           >
             <figure>
@@ -90,7 +91,8 @@ export default function Speaking() {
                 title={clip.title}
                 outlet={clip.outlet}
                 poster={clip.poster}
-                sizes="(max-width: 640px) 320px, 400px"
+                posterPosition={clip.posterPosition}
+                sizes="(max-width: 640px) 100vw, 420px"
               />
               <Caption talk={clip} />
             </figure>

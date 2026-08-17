@@ -31,7 +31,7 @@ function Preview({ project }: { project: Project }) {
   return (
     <div
       aria-hidden="true"
-      className="relative flex h-32 items-center justify-center overflow-hidden rounded-t-2xl
+      className="relative flex h-32 items-center justify-center overflow-hidden rounded-t-[19px]
                  border-b border-line-soft"
       style={{
         background: `linear-gradient(135deg, hsl(${hue} 30% 16%) 0%, hsl(${(hue + 40) % 360} 26% 11%) 100%)`,
@@ -97,14 +97,13 @@ function Card({ project, index }: { project: Project; index: number }) {
   return (
     <motion.li {...animation} style={{ perspective: 1000 }}>
       {project.unreachable || !project.href ? (
-        <div className="card flex h-full flex-col overflow-hidden opacity-70">{inner}</div>
+        <div className="card-quiet flex h-full flex-col overflow-hidden opacity-70">{inner}</div>
       ) : (
         <a
           href={project.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="card flex h-full flex-col overflow-hidden hover:-translate-y-1
-                     hover:border-amber/40 hover:shadow-lift"
+          className="card-pop flex h-full flex-col overflow-hidden"
         >
           {inner}
         </a>
@@ -132,7 +131,7 @@ export default function Work() {
               <p className="text-[14px] text-white/55">{group.blurb}</p>
             </div>
 
-            <ul className="mt-6 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
+            <ul className="mt-7 grid gap-y-8 gap-x-6 sm:grid-cols-2 xl:grid-cols-3">
               {group.projects.map((project, i) => (
                 <Card key={project.domain} project={project} index={i} />
               ))}

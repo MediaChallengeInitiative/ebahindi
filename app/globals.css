@@ -67,8 +67,38 @@
     @apply rounded-3xl border border-line-soft bg-teal-800 shadow-panel;
   }
 
+  /* Card language adapted from pubitygroup.com: chunky radius, thick accent
+     border, and a HARD un-blurred slab of accent colour offset behind the card.
+     Pubity does this in #FFEB00 on charcoal; rendered here in our amber on teal
+     so it stays coherent with the rest of the system. */
+  .card-pop {
+    @apply rounded-[22px] bg-teal-800 transition-[transform,box-shadow] duration-200 ease-out;
+    border: 3px solid theme("colors.amber.DEFAULT");
+    box-shadow: 8px 9px 0 0 theme("colors.amber.DEFAULT");
+  }
+
+  .card-pop:hover,
+  .card-pop:focus-visible {
+    transform: translate(3px, 3px);
+    box-shadow: 5px 6px 0 0 theme("colors.amber.DEFAULT");
+  }
+
+  .card-pop:active {
+    transform: translate(8px, 9px);
+    box-shadow: 0 0 0 0 theme("colors.amber.DEFAULT");
+  }
+
+  /* Static information cards. Same shape, no slab — a wall of amber blocks
+     would flatten the hierarchy that makes the interactive cards read as
+     clickable. */
+  .card-quiet {
+    @apply rounded-[22px] border border-line-soft bg-teal-700/60
+           transition duration-300 ease-out;
+  }
+
+  /* Kept as an alias so existing markup keeps working. */
   .card {
-    @apply rounded-2xl border border-line-soft bg-teal-700/60 transition duration-300 ease-out;
+    @apply card-quiet;
   }
 
   .btn {
@@ -144,6 +174,14 @@
 
   .js .reveal {
     opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .card-pop,
+  .card-pop:hover,
+  .card-pop:focus-visible,
+  .card-pop:active {
     transform: none;
     transition: none;
   }
