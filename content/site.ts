@@ -1,0 +1,334 @@
+/**
+ * Single source of content for the whole site.
+ * Every section renders from this file — future edits should be data-only.
+ */
+
+export const site = {
+  url: "https://ebahindi.vercel.app",
+  name: "Emmanuel Bahindi",
+  formalName: "Eng. Emmanuel Bahindi",
+  monogram: "EB",
+  title: "Emmanuel Bahindi — Software Engineer & AI Speaker",
+  description:
+    "Software engineer, AI practitioner and speaker based in Kampala. I build software with AI every single day — and I teach a continent to do the same.",
+  locale: "en_UG",
+} as const;
+
+export const contact = {
+  location: "Kampala, Uganda",
+  email: "bahindiemmanuel20@gmail.com",
+  phone: "+256 773 165 989",
+  phoneHref: "+256773165989",
+  linkedin: "https://www.linkedin.com/in/bahindi-emmanuel-52a8181b3/",
+  x: "https://x.com/Emmir256",
+  github: "https://github.com/MediaChallengeInitiative",
+  resume: "/resume.pdf",
+} as const;
+
+/** Prefilled mailto used by every "invite me to speak" CTA. */
+export const speakingMailto =
+  `mailto:${contact.email}` +
+  "?subject=" +
+  encodeURIComponent("Speaking invitation") +
+  "&body=" +
+  encodeURIComponent(
+    [
+      "Hello Emmanuel,",
+      "",
+      "I would like to invite you to speak at our event.",
+      "",
+      "Event: ",
+      "Date: ",
+      "Location / format: ",
+      "Audience: ",
+      "Topic we have in mind: ",
+      "",
+      "Thank you,",
+    ].join("\n"),
+  );
+
+export const hero = {
+  identity: "Software Engineer • AI Practitioner • Speaker on AI & Technology in Africa",
+  /** Headline is split so the middle clause can be set in italic amber. */
+  headline: {
+    lead: "I build software with",
+    accent: "AI every single day",
+    tail: "— and I teach a continent to do the same.",
+  },
+  portrait: {
+    src: "/portrait.jpg",
+    alt: "Portrait of Emmanuel Bahindi, software engineer and AI speaker based in Kampala, Uganda.",
+  },
+  ctas: {
+    speak: { label: "Invite me to speak", href: speakingMailto },
+    work: { label: "See my work", href: "#work" },
+  },
+  /**
+   * Words fed to the hero's next-word prediction animation — a literal
+   * visualisation of how a language model extends a sentence.
+   */
+  prediction: {
+    prefix: "AI predicts the next",
+    tokens: ["word", "line", "function", "opportunity"],
+  },
+} as const;
+
+export const about = {
+  label: "About",
+  heading: "An engineer who ships with AI, and teaches others to.",
+  body: [
+    "I am a software engineer based in Kampala, Uganda, and the Founder & CEO of COTE TECH (U) LTD. I work as Multimedia Web Developer and Technical Lead of the AI Media Lab at Media Challenge Initiative.",
+    "AI is not a side interest in my practice — it is how I work. I use it in production every day, and I spend as much time teaching educators and journalists to use it well as I do writing code.",
+  ],
+  education: {
+    degree: "BSc Software Engineering",
+    school: "Makerere University",
+    years: "2019 – 2024",
+  },
+  address: "4th Floor, Tirupati Mazima Mall, Kabalagala, Kampala",
+  facts: [
+    { value: "5+", label: "Years building software" },
+    { value: "30+", label: "Projects delivered" },
+  ],
+  roles: [
+    { role: "Founder & CEO", org: "COTE TECH (U) LTD" },
+    {
+      role: "Multimedia Web Developer & Technical Lead, AI Media Lab",
+      org: "Media Challenge Initiative",
+    },
+  ],
+} as const;
+
+export const aiMediaLab = {
+  label: "Flagship work",
+  heading: "The AI Media Lab",
+  project:
+    "Integrating AI Competences for Fighting Disinformation into Journalism Education in Eastern Africa",
+  partners: "With CAMECO • German-funded",
+  intro:
+    "I led the technology for a programme that puts practical AI skills into journalism education across Eastern Africa.",
+  contributions: [
+    {
+      title: "A phone-first AI e-learning platform",
+      body: "Architected for low-data, low-bandwidth conditions so students can learn on the device they actually own.",
+      meta: "Launched August 2026",
+    },
+    {
+      title: "Training of Trainers",
+      body: "Designed and lead-facilitated a five-day programme for 22 university educators from Uganda and Kenya.",
+      meta: "22 educators • Uganda & Kenya",
+    },
+    {
+      title: "The “AI for Journalists” curriculum",
+      body: "Authored four courses and eighteen videos, and present the material on camera.",
+      meta: "4 courses • 18 videos",
+    },
+  ],
+  reach: { value: "400", label: "students reached by the curriculum" },
+} as const;
+
+export type Talk = {
+  title: string;
+  outlet: string;
+  href?: string;
+  kind: "youtube" | "podcast" | "talk";
+  /** YouTube video id, for the click-to-load facade embed. */
+  youtubeId?: string;
+  meta?: string;
+};
+
+export const speaking = {
+  label: "Speaking & media",
+  heading: "On stage, on camera, on air.",
+  talks: [
+    {
+      title: "Highlight Video for the AI Journalism | AI Media Lab ToT",
+      outlet: "AI Media Lab",
+      href: "https://youtu.be/Xh0BSaJlHWA",
+      kind: "youtube",
+      youtubeId: "Xh0BSaJlHWA",
+    },
+    {
+      title: "AI vs Human Intelligence",
+      outlet: "The Rest of Us podcast",
+      href: "https://vt.tiktok.com/ZSV21tU48/",
+      kind: "podcast",
+    },
+    {
+      title: "“Starlink Is a Meaningful Disruptor”: Satellite Internet vs Africa's Telecom Giants",
+      outlet: "Switch Africa",
+      href: "https://vt.tiktok.com/ZSVNrJcsK/",
+      kind: "podcast",
+    },
+    {
+      title: "The Wise Man and the Clever Machine: Who Serves Whom?",
+      outlet: "Rotary Club of Makindye",
+      kind: "talk",
+      meta: "August 2026",
+    },
+  ] as Talk[],
+  availability:
+    "Available for keynotes, panels and trainings on AI and the future of work in Africa, AI-driven disinformation, and practical AI adoption.",
+} as const;
+
+export type Project = {
+  name: string;
+  href?: string;
+  /** Domain shown on the preview card. */
+  domain: string;
+  blurb: string;
+  /** Set when a URL does not currently resolve — rendered unlinked. */
+  unreachable?: boolean;
+};
+
+export type WorkGroup = {
+  id: string;
+  title: string;
+  blurb: string;
+  projects: Project[];
+};
+
+export const work = {
+  label: "Selected work",
+  heading: "Things I have built and shipped.",
+  groups: [
+    {
+      id: "mci",
+      title: "MCI digital estate",
+      blurb: "The public web platform of Media Challenge Initiative and its programmes.",
+      projects: [
+        {
+          name: "Media Challenge Initiative",
+          href: "https://www.mciug.org",
+          domain: "mciug.org",
+          blurb: "The organisation's main site.",
+        },
+        {
+          name: "Media Challenge Awards",
+          href: "https://awards.mciug.org",
+          domain: "awards.mciug.org",
+          blurb: "Awards programme and public nominations.",
+        },
+        {
+          name: "MCI Catalyst",
+          href: "https://catalyst.mciug.org",
+          domain: "catalyst.mciug.org",
+          blurb: "Catalyst programme platform.",
+        },
+        {
+          name: "Media Challenge Fellowship",
+          href: "https://fellowship.mciug.org",
+          domain: "fellowship.mciug.org",
+          blurb: "Fellowship intake and alumni.",
+        },
+        {
+          name: "Love Facts Stickers",
+          href: "https://stickers.lovefacts.africa",
+          domain: "stickers.lovefacts.africa",
+          blurb: "Media-literacy sticker campaign.",
+        },
+        {
+          name: "Solutions Now Africa",
+          href: "https://solutionsnow.africa",
+          domain: "solutionsnow.africa",
+          blurb: "Solutions journalism platform.",
+        },
+      ],
+    },
+    {
+      id: "cote",
+      title: "COTE TECH client work",
+      blurb: "Delivered through my company, COTE TECH (U) LTD.",
+      projects: [
+        {
+          name: "INSPIRE AFRICA",
+          href: "https://www.inspireafricans.com",
+          domain: "inspireafricans.com",
+          blurb: "Labour-mobility platform.",
+        },
+      ],
+    },
+    {
+      id: "freelance",
+      title: "Freelance era",
+      blurb: "Earlier independent client projects.",
+      projects: [
+        {
+          name: "Toil And Promote Agriculture",
+          href: "https://www.tapagric.org",
+          domain: "tapagric.org",
+          blurb: "Agricultural NGO.",
+        },
+        {
+          name: "NALAW Quizzes",
+          domain: "nalawquizzes.org",
+          blurb: "Legal-education quiz platform.",
+          unreachable: true,
+        },
+        {
+          name: "Musawo Betty Care & Research Centre",
+          href: "https://mbcrc.org",
+          domain: "mbcrc.org",
+          blurb: "Health care and research NGO.",
+        },
+        {
+          name: "Maritime Shipping Uganda",
+          href: "https://www.maritimeshipping-uganda.com",
+          domain: "maritimeshipping-uganda.com",
+          blurb: "Logistics and freight forwarding.",
+        },
+        {
+          name: "Passionate Hearts Ministries",
+          href: "https://passionateheartsministries.org",
+          domain: "passionateheartsministries.org",
+          blurb: "Faith-based non-profit.",
+        },
+      ],
+    },
+  ] as WorkGroup[],
+} as const;
+
+export const skills = {
+  label: "Skills",
+  heading: "How I work.",
+  groups: [
+    {
+      title: "AI-Native Engineering",
+      blurb: "Daily practice, not a line on a CV.",
+      items: [
+        "Daily production LLM use",
+        "Prompt engineering",
+        "LLM API integration",
+        "AI-assisted code, testing & documentation",
+        "AI ethics & verification training",
+      ],
+    },
+    {
+      title: "Full-Stack",
+      blurb: "The stack I build and ship on.",
+      items: [
+        "JavaScript",
+        "PHP",
+        "React",
+        "Next.js 14",
+        "Laravel",
+        "Tailwind",
+        "MongoDB",
+        "MySQL",
+        "Sanity",
+        "Strapi",
+        "Jest",
+        "Docker",
+        "Git",
+      ],
+    },
+  ],
+} as const;
+
+export const nav = [
+  { label: "About", href: "#about" },
+  { label: "AI Media Lab", href: "#ai-media-lab" },
+  { label: "Speaking", href: "#speaking" },
+  { label: "Work", href: "#work" },
+  { label: "Contact", href: "#contact" },
+] as const;
