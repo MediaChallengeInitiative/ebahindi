@@ -170,15 +170,15 @@ export const experience = {
         },
         {
           text:
-            "Technical Lead on “Integrating AI Competences for Fighting Disinformation into Journalism Education in Eastern Africa” (with CAMECO, German-funded): architected and shipped the programme’s phone-first, low-data AI e-learning platform (launched Aug 2026).",
+            "Technical Lead on “Integrating AI Competences for Fighting Disinformation into Journalism Education in Eastern Africa” (with CAMECO and BMZ): architected and shipped the programme’s phone-first, low-data AI e-learning platform (launched Aug 2026).",
         },
         {
           text:
-            "Designed and lead-facilitated a 5-day AI Training of Trainers for 22 university journalism educators from Uganda and Kenya, who now deliver the curriculum to 400 students across both countries.",
+            "Co-designed and lead-facilitated a 5-day AI Training of Trainers for 22 university journalism educators from Uganda and Kenya, who now deliver the curriculum to 400 students across both countries.",
         },
         {
           text:
-            "Authored the 4-course, 18-video “AI for Journalists” curriculum (AI foundations, prompting, ethics, AI content creation), and serves as its on-camera instructor for the National Newsroom Contest 2026.",
+            "Authored the 4-course, 18-video “AI for Journalists” curriculum (AI foundations, prompting, ethics, AI content creation), and serve as its on-camera instructor for the National Newsroom Contest 2026.",
         },
       ],
     },
@@ -190,18 +190,21 @@ export const experience = {
       points: [
         {
           text:
-            "Founded and leads a digital solutions company delivering web platforms and AI-enabled products for organizations in Uganda and abroad, with AI-assisted engineering as standard practice.",
+            "Founded and lead a digital solutions company delivering web platforms and AI-enabled products for organizations in Uganda and abroad, with AI-assisted engineering as standard practice.",
         },
         {
           text:
-            "Serves as Chief Technology Officer to INSPIRE AFRICA, a UK-registered labour-mobility organization: delivered its public website end to end.",
+            "Serve as Chief Technology Officer to INSPIRE AFRICA, a UK-registered labour-mobility organization: delivered its public website end to end, from design to deployment and handover.",
           links: [{ label: "inspireafricans.com", href: "https://www.inspireafricans.com" }],
         },
         {
           text:
             "Architected INSPIRE AFRICA’s Central Database platform: role-based access for 29 staff job titles, two-factor authentication, audit logging, and separate candidate (Readiness) and employer (Roster) portals built around data-protection-by-design.",
         },
-        { text: "Authored the platform’s official user guide and staff training programme." },
+        {
+          text:
+            "Authored the platform’s official user guide and staff training programme, turning a complex system into documentation any staff member can follow.",
+        },
       ],
     },
     {
@@ -224,7 +227,7 @@ export const experience = {
         },
         {
           text:
-            "Provided organization-wide IT support and user training, managed LAN/WAN networks and hardware, and created technical documentation and user guides.",
+            "Provided organization-wide IT support and user training, managed LAN/WAN networks and hardware, and created technical documentation and user guides for all implemented systems.",
         },
       ],
     },
@@ -243,8 +246,7 @@ export const experience = {
             "Built client platforms across agriculture, health, education and logistics, including:",
           links: [
             { label: "TAPA", href: "https://www.tapagric.org" },
-            // Domain returns NXDOMAIN; kept on the record, rendered unlinked.
-            { label: "NALAW Quizzes", href: "https://nalawquizzes.org", unreachable: true },
+            { label: "Passionate Hearts Ministries", href: "https://passionateheartsministries.org" },
             { label: "Musawo Betty Care & Research Center", href: "https://mbcrc.org" },
             {
               label: "Maritime Shipping Company Ltd",
@@ -254,11 +256,11 @@ export const experience = {
         },
         {
           text:
-            "Specialized in affordable, low-maintenance stacks suited to small-organization budgets and Ugandan hosting realities.",
+            "Specialized in affordable, low-maintenance stacks (React, PHP/Laravel, WordPress-free custom builds) suited to small-organization budgets and Ugandan hosting realities.",
         },
         {
           text:
-            "Maintains long-term support relationships with clients, several of which remain live under his care today.",
+            "Maintained long-term support relationships with clients, several of which remain live and under my care today.",
         },
       ],
     },
