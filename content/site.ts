@@ -121,6 +121,150 @@ export const about = {
   ],
 } as const;
 
+/**
+ * A bullet from the resume. URLs are carried in `links` rather than inlined in
+ * `text` so the prose stays readable here and the anchors stay real in the DOM
+ * — a bullet that spells out "https://…" mid-sentence reads badly on screen.
+ */
+export type ExperienceLink = {
+  label: string;
+  href: string;
+  /** Set when the domain no longer resolves — rendered as plain text. */
+  unreachable?: boolean;
+};
+
+export type ExperiencePoint = { text: string; links?: ExperienceLink[] };
+
+export type Role = {
+  id: string;
+  role: string;
+  org: string;
+  period: string;
+  /** Exactly four, for every institution — the sections are deliberately balanced. */
+  points: [ExperiencePoint, ExperiencePoint, ExperiencePoint, ExperiencePoint];
+};
+
+export const experience = {
+  label: "Experience",
+  heading: { lead: "Where I have", accent: "done the work." } as Headline,
+  roles: [
+    {
+      id: "mci",
+      role: "Multimedia Web Developer & Technical Lead, AI Media Lab",
+      org: "Media Challenge Initiative",
+      period: "Aug 2023 – Present",
+      points: [
+        {
+          text:
+            "Lead development and deployment of MCI’s enterprise web estate with Next.js 14 and React, owning the full lifecycle:",
+          links: [
+            // The resume lists www.awards.mciug.org; that host has no matching
+            // TLS certificate, so the working apex is used. See README.
+            { label: "MCI website", href: "https://www.mciug.org" },
+            { label: "Media Challenge Awards", href: "https://awards.mciug.org" },
+            { label: "Media Challenge Expo", href: "https://expo.mciug.org" },
+            { label: "Fellowship", href: "https://fellowship.mciug.org" },
+            { label: "Love Facts Stickers", href: "https://stickers.lovefacts.africa" },
+            { label: "Solutions Now Africa", href: "https://solutionsnow.africa" },
+          ],
+        },
+        {
+          text:
+            "Technical Lead on “Integrating AI Competences for Fighting Disinformation into Journalism Education in Eastern Africa” (with CAMECO, German-funded): architected and shipped the programme’s phone-first, low-data AI e-learning platform (launched Aug 2026).",
+        },
+        {
+          text:
+            "Designed and lead-facilitated a 5-day AI Training of Trainers for 22 university journalism educators from Uganda and Kenya, who now deliver the curriculum to 400 students across both countries.",
+        },
+        {
+          text:
+            "Authored the 4-course, 18-video “AI for Journalists” curriculum (AI foundations, prompting, ethics, AI content creation), and serves as its on-camera instructor for the National Newsroom Contest 2026.",
+        },
+      ],
+    },
+    {
+      id: "cote",
+      role: "Founder & CEO",
+      org: "COTE TECH (U) LTD",
+      period: "2024 – Present",
+      points: [
+        {
+          text:
+            "Founded and leads a digital solutions company delivering web platforms and AI-enabled products for organizations in Uganda and abroad, with AI-assisted engineering as standard practice.",
+        },
+        {
+          text:
+            "Serves as Chief Technology Officer to INSPIRE AFRICA, a UK-registered labour-mobility organization: delivered its public website end to end.",
+          links: [{ label: "inspireafricans.com", href: "https://www.inspireafricans.com" }],
+        },
+        {
+          text:
+            "Architected INSPIRE AFRICA’s Central Database platform: role-based access for 29 staff job titles, two-factor authentication, audit logging, and separate candidate (Readiness) and employer (Roster) portals built around data-protection-by-design.",
+        },
+        { text: "Authored the platform’s official user guide and staff training programme." },
+      ],
+    },
+    {
+      id: "baylor",
+      role: "IT Officer (Intern)",
+      org: "Baylor Foundation Uganda",
+      period: "Sep 2022 – Mar 2023",
+      points: [
+        {
+          text:
+            "Developed and maintained business-process automation solutions that improved operational efficiency by 30%.",
+        },
+        {
+          text:
+            "Designed and implemented web interfaces for internal systems using React and Tailwind CSS.",
+        },
+        {
+          text:
+            "Conducted system analysis and provided recommendations for process improvements adopted across departments.",
+        },
+        {
+          text:
+            "Provided organization-wide IT support and user training, managed LAN/WAN networks and hardware, and created technical documentation and user guides.",
+        },
+      ],
+    },
+    {
+      id: "freelance",
+      role: "Full-Stack Software Developer",
+      org: "Freelance",
+      period: "2020 – 2022",
+      points: [
+        {
+          text:
+            "Delivered 30+ projects for NGOs and businesses, handling the full engagement solo: requirements, design, build, deployment, hosting and client training.",
+        },
+        {
+          text:
+            "Built client platforms across agriculture, health, education and logistics, including:",
+          links: [
+            { label: "TAPA", href: "https://www.tapagric.org" },
+            // Domain returns NXDOMAIN; kept on the record, rendered unlinked.
+            { label: "NALAW Quizzes", href: "https://nalawquizzes.org", unreachable: true },
+            { label: "Musawo Betty Care & Research Center", href: "https://mbcrc.org" },
+            {
+              label: "Maritime Shipping Company Ltd",
+              href: "https://www.maritimeshipping-uganda.com",
+            },
+          ],
+        },
+        {
+          text:
+            "Specialized in affordable, low-maintenance stacks suited to small-organization budgets and Ugandan hosting realities.",
+        },
+        {
+          text:
+            "Maintains long-term support relationships with clients, several of which remain live under his care today.",
+        },
+      ],
+    },
+  ] as Role[],
+} as const;
+
 export const aiMediaLab = {
   label: "Flagship work",
   heading: { lead: "The", accent: "AI Media Lab" } as Headline,
@@ -245,10 +389,10 @@ export const work = {
           blurb: "Awards programme and public nominations.",
         },
         {
-          name: "MCI Catalyst",
-          href: "https://catalyst.mciug.org",
-          domain: "catalyst.mciug.org",
-          blurb: "Catalyst programme platform.",
+          name: "Media Challenge Expo",
+          href: "https://expo.mciug.org",
+          domain: "expo.mciug.org",
+          blurb: "Africa Media and Creatives Career Expo.",
         },
         {
           name: "Media Challenge Fellowship",
@@ -280,6 +424,18 @@ export const work = {
           href: "https://www.inspireafricans.com",
           domain: "inspireafricans.com",
           blurb: "Labour-mobility platform.",
+        },
+        {
+          name: "SAO Uganda",
+          href: "https://saouganda.org",
+          domain: "saouganda.org",
+          blurb: "Share An Opportunity — education, health and development NGO.",
+        },
+        {
+          name: "Tamkeen Uganda",
+          href: "https://tamkeenug.com",
+          domain: "tamkeenug.com",
+          blurb: "Tamkeen Academy — Montessori and Cambridge school in Kampala.",
         },
       ],
     },
@@ -364,12 +520,13 @@ export const skills = {
 export type RailItem = {
   id: string;
   label: string;
-  icon: "home" | "user" | "lab" | "mic" | "grid" | "spark" | "mail";
+  icon: "home" | "user" | "case" | "lab" | "mic" | "grid" | "spark" | "mail";
 };
 
 export const rail: RailItem[] = [
   { id: "top", label: "Home", icon: "home" },
   { id: "about", label: "About", icon: "user" },
+  { id: "experience", label: "Experience", icon: "case" },
   { id: "ai-media-lab", label: "AI Media Lab", icon: "lab" },
   { id: "speaking", label: "Speaking", icon: "mic" },
   { id: "work", label: "Work", icon: "grid" },

@@ -70,16 +70,15 @@ edit — no component needs touching.
 These are the things I could not do from the repo. Nothing here blocks the site from
 running; each one improves it.
 
-### 1. Two `www.` subdomains do not resolve
+### 1. `www.awards.mciug.org` does not resolve
 
-`www.awards.mciug.org` and `www.catalyst.mciug.org` both fail to resolve. The apex forms
-work, so the site links to those instead:
+The resume lists `https://www.awards.mciug.org`, but that host has no matching TLS
+certificate and fails. The apex form works, so the site links to that instead:
 
 - `https://awards.mciug.org` ✅
-- `https://catalyst.mciug.org` ✅
 
-If the `www.` variants should work, that is a DNS record to add on the MCI side. Nothing
-needs to change in this repo either way.
+If the `www.` variant should work, that is a DNS/certificate record to add on the MCI
+side. Nothing needs to change in this repo either way.
 
 ### 2. `nalawquizzes.org` — removed
 
@@ -267,11 +266,11 @@ Layout was tested at all three widths in a real browser. Cumulative Layout Shift
 
 Every external URL was verified with `curl -L`. All resolve except where noted:
 
-✅ mciug.org · awards.mciug.org · catalyst.mciug.org · fellowship.mciug.org ·
-stickers.lovefacts.africa · solutionsnow.africa · inspireafricans.com · tapagric.org ·
-mbcrc.org · maritimeshipping-uganda.com · passionateheartsministries.org ·
-youtu.be/Xh0BSaJlHWA · both TikTok videos · x.com/Emmir256 ·
-github.com/Bahindiemma
+✅ mciug.org · awards.mciug.org · expo.mciug.org · fellowship.mciug.org ·
+stickers.lovefacts.africa · solutionsnow.africa · inspireafricans.com · saouganda.org ·
+tamkeenug.com · tapagric.org · mbcrc.org · maritimeshipping-uganda.com ·
+passionateheartsministries.org · youtu.be/Xh0BSaJlHWA · both TikTok videos ·
+x.com/Emmir256 · github.com/Bahindiemma
 
 ⚠️ **LinkedIn** returns HTTP `999` to command-line requests. That is LinkedIn's standard
 anti-bot response, not a broken link — it opens normally in a browser.
