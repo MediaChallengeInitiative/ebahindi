@@ -281,6 +281,18 @@ export const work = {
           domain: "inspireafricans.com",
           blurb: "Labour-mobility platform.",
         },
+        {
+          name: "SAO Uganda",
+          href: "https://saouganda.org",
+          domain: "saouganda.org",
+          blurb: "Share An Opportunity — education, health and development NGO.",
+        },
+        {
+          name: "Tamkeen Uganda",
+          href: "https://tamkeenug.com",
+          domain: "tamkeenug.com",
+          blurb: "Tamkeen Academy — Montessori and Cambridge school in Kampala.",
+        },
       ],
     },
     {
