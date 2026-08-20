@@ -43,12 +43,21 @@ export default function Contact() {
             </div>
             <div>
               <dt className="label">Phone</dt>
-              <dd className="mt-2">
+              <dd className="mt-2 flex flex-wrap items-baseline gap-x-3 gap-y-1">
                 <a
                   href={`tel:${contact.phoneHref}`}
                   className="text-lg font-bold transition-colors hover:text-amber sm:text-xl"
                 >
                   {contact.phone}
+                </a>
+                <span aria-hidden="true" className="text-white/30">
+                  /
+                </span>
+                <a
+                  href={`tel:${contact.phoneAltHref}`}
+                  className="text-lg font-bold transition-colors hover:text-amber sm:text-xl"
+                >
+                  {contact.phoneAlt}
                 </a>
               </dd>
             </div>

@@ -34,6 +34,15 @@ export default function About() {
             <p className="mt-1.5 text-[14px] text-white/60">
               {about.education.school} · {about.education.years}
             </p>
+            <p className="pretty mt-3 text-[14px] leading-relaxed text-white/55">
+              {about.education.project}
+            </p>
+            <div className="mt-4 border-t border-line-soft pt-4">
+              <p className="text-[15px] font-bold leading-snug">{about.certification.name}</p>
+              <p className="mt-1 text-[14px] text-white/60">
+                {about.certification.issuer} · {about.certification.year}
+              </p>
+            </div>
           </div>
         </div>
       </div>

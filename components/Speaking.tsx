@@ -30,6 +30,7 @@ function Caption({ talk }: { talk: Talk }) {
       <p className="pretty text-[16px] font-bold leading-snug sm:text-[17px]">{talk.title}</p>
       <p className="mt-1 flex flex-wrap items-center gap-x-3 text-[14px] text-white/60">
         <span>{talk.outlet}</span>
+        {talk.meta ? <span>{talk.meta}</span> : null}
         {talk.href ? (
           <a
             href={talk.href}

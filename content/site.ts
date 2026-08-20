@@ -30,9 +30,12 @@ export const contactSection = {
 
 export const contact = {
   location: "Kampala, Uganda",
-  email: "ebahindi@gmail.com",
+  email: "bahindiemmanuel20@gmail.com",
   phone: "+256 773 165 989",
   phoneHref: "+256773165989",
+  /** Second number carried on the CV header. */
+  phoneAlt: "+256 750 329 751",
+  phoneAltHref: "+256750329751",
   linkedin: "https://www.linkedin.com/in/bahindi-emmanuel-52a8181b3/",
   x: "https://x.com/Emmir256",
   github: "https://github.com/Bahindiemma?tab=repositories",
@@ -104,6 +107,12 @@ export const about = {
     degree: "BSc Software Engineering",
     school: "Makerere University",
     years: "2019 – 2024",
+    project: "Final-year project: Fuel Demand Forecasting System (using AI).",
+  },
+  certification: {
+    name: "Responsive Web Design",
+    issuer: "freeCodeCamp",
+    year: "2023",
   },
   address: "4th Floor, Tirupati Mazima Mall, Kabalagala, Kampala",
   /** One-line identity for the sticky profile card. */
@@ -320,6 +329,7 @@ export const speaking = {
       kind: "youtube",
       videoId: "Xh0BSaJlHWA",
       poster: "/ai-media-lab-tot-cover.jpg",
+      meta: "Kampala · July 2026",
     },
     {
       // vt.tiktok.com shorteners are not embeddable; these are the resolved
@@ -349,7 +359,7 @@ export const speaking = {
     },
   ] as Talk[],
   availability:
-    "Available for keynotes, panels and trainings on AI and the future of work in Africa, AI-driven disinformation, and practical AI adoption.",
+    "Available for keynotes, panels and trainings on AI and the future of work in Africa, AI-driven disinformation and how societies fight it, practical AI adoption for organizations, and building AI-era digital products for low-bandwidth markets.",
 } as const;
 
 export type Project = {
@@ -487,7 +497,8 @@ export const skills = {
         "Prompt engineering",
         "LLM API integration",
         "AI-assisted code, testing & documentation",
-        "AI ethics & verification training",
+        "AI ethics & verification frameworks",
+        "Ubuntu AI Ethics Code (co-developed)",
       ],
     },
     {
@@ -496,17 +507,24 @@ export const skills = {
       items: [
         "JavaScript",
         "PHP",
+        "HTML5",
+        "CSS3",
         "React",
         "Next.js 14",
         "Laravel",
-        "Tailwind",
+        "Tailwind CSS",
+        "Bootstrap",
         "MongoDB",
         "MySQL",
         "Sanity",
         "Strapi",
+        "Git/GitHub",
         "Jest",
+        "React Testing Library",
         "Docker",
-        "Git",
+        "Postman",
+        "System integration & database architecture",
+        "LAN/WAN administration",
       ],
     },
   ],
