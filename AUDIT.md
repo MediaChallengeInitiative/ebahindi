@@ -151,7 +151,7 @@ Every URL in the brief was checked with `curl -L`:
 |---|---|
 | https://www.mciug.org | ✅ 200 |
 | https://awards.mciug.org | ✅ 200 |
-| https://catalyst.mciug.org | ✅ 200 |
+| https://expo.mciug.org | ✅ 200 |
 | https://fellowship.mciug.org | ✅ 200 |
 | https://stickers.lovefacts.africa | ✅ 200 |
 | https://solutionsnow.africa | ✅ 200 |
@@ -160,11 +160,10 @@ Every URL in the brief was checked with `curl -L`:
 | https://mbcrc.org | ✅ 200 |
 | https://www.maritimeshipping-uganda.com | ✅ 200 |
 | https://passionateheartsministries.org | ✅ 200 (rejects non-browser UA with 406; fine in a browser) |
-| https://www.awards.mciug.org | ⚠️ fails — **`www.` subdomain not configured**; use apex `awards.mciug.org` |
-| https://www.catalyst.mciug.org | ⚠️ fails — same; use apex `catalyst.mciug.org` |
+| https://www.awards.mciug.org | ⚠️ fails — `www.` host has no matching TLS certificate |
 | https://nalawquizzes.org | ❌ **NXDOMAIN** — domain does not resolve (expired or never renewed) |
 
-Actions taken in the redesign: use the working apex URLs for awards and catalyst;
+Actions taken in the redesign: use the working apex URLs for awards and expo;
 keep NALAW in the work list but render it **without** a live link, and flag all three
 in the README for Emmanuel to resolve.
 

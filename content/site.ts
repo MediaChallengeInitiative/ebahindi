@@ -245,10 +245,10 @@ export const work = {
           blurb: "Awards programme and public nominations.",
         },
         {
-          name: "MCI Catalyst",
-          href: "https://catalyst.mciug.org",
-          domain: "catalyst.mciug.org",
-          blurb: "Catalyst programme platform.",
+          name: "Media Challenge Expo",
+          href: "https://expo.mciug.org",
+          domain: "expo.mciug.org",
+          blurb: "Africa Media and Creatives Career Expo.",
         },
         {
           name: "Media Challenge Fellowship",
