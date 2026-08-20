@@ -3,6 +3,7 @@ import Rail from "@/components/Rail";
 import ProfileCard from "@/components/ProfileCard";
 import Hero from "@/components/Hero";
 import About from "@/components/About";
+import Experience from "@/components/Experience";
 import AIMediaLab from "@/components/AIMediaLab";
 import Speaking from "@/components/Speaking";
 import Work from "@/components/Work";
@@ -36,6 +37,7 @@ export default function Page() {
         <main id="main" className="order-1 min-w-0 lg:order-none">
           <Hero />
           <About />
+          <Experience />
           <AIMediaLab />
           <Speaking />
           <Work />
